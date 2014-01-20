@@ -2,7 +2,10 @@
   "name": "hunt",
   "description": "House-hunting for pros.",
   "version": "0.0.1",
-  "author": "Josh McMillan",
+  "contributors": [
+    "Josh McMillan",
+    "Jesse the Game"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/joshmcmillan/hunt.git"
