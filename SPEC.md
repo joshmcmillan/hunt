@@ -37,9 +37,10 @@ Properties are added to the hunt by the user - they can either manually enter de
 - council tax
 - if we know sq footage of house, maybe potential heating/electricity costs?
 - nearby shit to do (yplan/yelp?)
+- local schools
 - (need more ideas)
 
-You can upload photos... if you upload geotagged photos maybe it can automatically figure out which property to go to? If we've scraped photos from agent then split them up between agent/user submitted
+You can upload photos... if you upload geotagged photos maybe it can automatically figure out which property to attach them to? If we've scraped photos from agent then split them up between agent/user submitted
 
 Can mark a property in various ways - perhaps initially just:
 
