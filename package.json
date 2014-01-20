@@ -17,5 +17,9 @@
     "nib": "*",
     "connect-assets": "*",
     "passport": "*"
-  }
+  },
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "engineStrict": true
 }
