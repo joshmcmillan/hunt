@@ -2,13 +2,19 @@
   "name": "hunt",
   "description": "House-hunting for pros.",
   "version": "0.0.1",
-  "scripts": {
-    "start": "coffee index.coffee"
-  },
+  "author": "Josh McMillan",
   "repository": {
     "type": "git",
     "url": "https://github.com/joshmcmillan/hunt.git"
   },
+  "private": true,
+  "scripts": {
+    "start": "coffee index.coffee"
+  },
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "engineStrict": true,
   "dependencies": {
     "express": "*",
     "coffee-script": "*",
@@ -17,9 +23,5 @@
     "nib": "*",
     "connect-assets": "*",
     "passport": "*"
-  },
-  "engines": {
-    "node": "~0.10.0"
-  },
-  "engineStrict": true
+  }
 }
