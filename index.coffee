@@ -1,0 +1,3 @@
+hunt = require './app'
+
+hunt()

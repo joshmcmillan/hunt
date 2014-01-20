@@ -1,0 +1,21 @@
+{
+  "name": "hunt",
+  "description": "House-hunting for pros.",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "coffee index.coffee"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshmcmillan/hunt.git"
+  },
+  "dependencies": {
+    "express": "*",
+    "coffee-script": "*",
+    "jade": "*",
+    "stylus": "*",
+    "nib": "*",
+    "connect-assets": "*",
+    "passport": "*"
+  }
+}
