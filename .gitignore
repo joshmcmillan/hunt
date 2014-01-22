@@ -85,3 +85,4 @@ Icon
 # proportion of contributors will probably not be using SublimeText
 # *.sublime-project
 
+.powenv
