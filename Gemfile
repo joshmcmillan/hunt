@@ -34,4 +34,4 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'debugger', group: [:development, :test]
 
-gem 'dotenv'
+gem 'dotenv-rails'
