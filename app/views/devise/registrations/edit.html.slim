@@ -1,0 +1,35 @@
+h1.page-header My Account
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+  = devise_error_messages!
+
+  .form-group
+    = f.label :email
+    = f.email_field :email, autofocus: true, class: 'form-control'
+
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    div
+      | Currently waiting confirmation for: 
+      = resource.unconfirmed_email
+
+  .form-group
+    = f.label :password
+    = f.password_field :password, autocomplete: "off", class: 'form-control'
+
+  .form-group
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, class: 'form-control'
+
+  .form-group
+    = f.label :current_password
+    = f.password_field :current_password, class: 'form-control'
+
+  div
+    = f.submit "Update", class: 'btn btn-primary'
+
+hr
+
+p
+  | Unhappy? If we've failed you, feel free to 
+  = link_to "cancel your account", registration_path(resource_name), data: { confirm: "Are you sure? This is permanent and unreversible." }, method: :delete
+  |  - we understand, even though it hurts.

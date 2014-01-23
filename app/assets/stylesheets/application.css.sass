@@ -1,2 +1,26 @@
 //= require_self
 //= require_tree .
+
+@import "bourbon"
+
+$navbarBackgroundColor: #407394
+
+body
+  margin-top: 60px
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  font-family: "Lato", "Helvetica Neue", "Helvetica", sans-serif
+
+.navbar-default
+  background: $navbarBackgroundColor
+  border-bottom: none
+  +box-shadow(0 2px rgba(0, 0, 0, 0.15))
+
+  a
+    color: #fff !important
