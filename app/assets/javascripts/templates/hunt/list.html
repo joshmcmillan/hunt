@@ -1,0 +1,16 @@
+<ul class=hunts-list>
+  <li ng-repeat="hunt in hunts">
+    <h2>
+      <a ui-sref="hunt.view({huntID: hunt.id})">
+        {{hunt.name}}
+      </a>
+    </h2>
+    <p>[Map with region]
+    <p>Hunters:
+    <ul>
+      <li ng-repeat="user in hunt.users">
+        <a ui-sref="hunt.user({userID: user.id})">
+          {{hunt.name}}
+        </a>
+    </ul>
+</ul>
