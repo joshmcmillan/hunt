@@ -61,6 +61,8 @@ config/database.yml
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 
+# Sensitive information!
+.env
 
 ### OSX ###
 .DS_Store

@@ -33,3 +33,5 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'debugger', group: [:development, :test]
+
+gem 'dotenv'
