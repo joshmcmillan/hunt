@@ -1,0 +1,11 @@
+h2
+  | {{property.name}}
+
+.gallery
+  img ng-src="{{photo.url}}" ng-repeat="photo in property.photos"
+
+google-map center="property.location"
+
+dl
+  attribute ng-repeat="attribute in property.attributes"
+

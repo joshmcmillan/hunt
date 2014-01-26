@@ -1,30 +1,28 @@
 angular.module('hunt')
 
-.config ($stateProvider, $urlRouterProvider) ->
+.config ($stateProvider) ->
   $stateProvider
-    .state 'hunt',
+    .state 'hunts',
       abstract: true
       url: '/hunts'
       template: """
         <ui-view/>
       """
 
-    .state 'hunt.view',
+    .state 'hunts.create',
+      url: '/new'
+      controller: 'HuntCreateCtrl'
+      templateUrl: 'hunt/hunts/create.html'
+
+    .state 'hunts.view',
       url: '/:huntID'
       controller: 'HuntViewCtrl'
-      template: """
-        <h1>{{hunt.name}}</h1>
+      templateUrl: 'hunt/hunts/view.html'
 
-        <button ui-sref="hunt.view.pipeline">Pipeline</button>
-        <button ui-sref="hunt.view.map">Map</button>
-
-        <ui-view/>
-      """
-
-    .state 'hunt.list',
+    .state 'hunts.list',
       url: ''
       controller: 'HuntListCtrl'
-      templateUrl: 'hunt/list.html'
+      templateUrl: 'hunt/hunts/list.html'
 
 .controller 'HuntViewCtrl', ($scope, $stateParams, hunt) ->
   $scope.hunt = {}
@@ -40,3 +38,8 @@ angular.module('hunt')
     .success (data) ->
       $scope.hunts = data
 
+.controller 'HuntCreateCtrl', ($scope, session, hunt) ->
+  $scope.hunt = {}
+
+  $scope.submit = ->
+    hunt.hunts.create $scope.hunt

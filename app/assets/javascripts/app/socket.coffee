@@ -1,4 +1,4 @@
-angular.module('socket.io')
+angular.module('socket.io', [])
 
 .service 'io', ->
   connect: (host) ->

@@ -23,6 +23,7 @@ angular.module('hunt')
         dfd = $q.defer()
 
         get('/hunt.json')
+        service.hunts.view()
           .success (hunt) ->
             dfd.resolve [hunt]
           .error (data) ->
@@ -39,5 +40,10 @@ angular.module('hunt')
             service.properties.view()
               .success (property) ->
                 hunt.properties.push property
+
+            service.users.view()
+              .success (user) ->
+                hunt.users.push user
+
 
 
