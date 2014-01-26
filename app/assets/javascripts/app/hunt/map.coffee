@@ -7,4 +7,5 @@ angular.module('hunt')
       controller: 'MapCtrl'
       templateUrl: 'hunt/map.html'
 
-
+.controller 'MapCtrl', ($scope) ->
+  undefined

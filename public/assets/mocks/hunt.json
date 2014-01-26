@@ -13,15 +13,7 @@
     "radius": 3
   },
   "users": [
-    {
-      (see user.json)
-    },
-    ...
   ],
   "properties": [
-    {
-      (see property.json)
-    },
-    ...
   ]
 }

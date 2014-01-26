@@ -10,10 +10,11 @@ angular.module('hunt')
       """
 
     .state 'hunt.view',
-      abstract: true
       url: '/:huntID'
       controller: 'HuntViewCtrl'
       template: """
+        <h1>{{hunt.name}}</h1>
+
         <button ui-sref="hunt.view.pipeline">Pipeline</button>
         <button ui-sref="hunt.view.map">Map</button>
 
@@ -22,7 +23,7 @@ angular.module('hunt')
 
     .state 'hunt.list',
       url: ''
-      controller: 'HuntViewCtrl'
+      controller: 'HuntListCtrl'
       templateUrl: 'hunt/list.html'
 
 .controller 'HuntViewCtrl', ($scope, $stateParams, hunt) ->
@@ -35,7 +36,7 @@ angular.module('hunt')
 .controller 'HuntListCtrl', ($scope, session, hunt) ->
   $scope.hunts = []
 
-  hunt.hunts.list(session.user.id)
+  hunt.hunts.list() #session.user.id)
     .success (data) ->
       $scope.hunts = data
 

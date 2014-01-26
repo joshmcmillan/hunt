@@ -1,36 +1,43 @@
 angular.module('hunt')
 
-.service 'hunt', ($http) ->
+.service 'hunt', ($http, $q, session) ->
   get = (url) ->
     $http
       method: 'get'
       url: '/assets/mocks' + url
 
+  service =
+    properties:
+      list: ->
+        get '/properties.json'
 
-  properties:
-    list: ->
-      get '/properties.json'
+      view: (properyID) ->
+        get '/property.json'
 
-    view: (properyID) ->
-      get '/property.json'
+    users:
+      view: (userID) ->
+        get '/user.json'
 
-  users:
-    view: (userID) ->
-      get '/user.json'
+    hunts:
+      list: (userID) ->
+        dfd = $q.defer()
 
-  hunts:
-    list: (userID) ->
-      get '/hunt.json'
+        get('/hunt.json')
+          .success (hunt) ->
+            dfd.resolve [hunt]
+          .error (data) ->
+            dfd.reject data
 
-    view: (huntID) ->
-      get '/hunt.json'
+        success:
+          dfd.promise.then
+        error:
+          dfd.promise.catch
 
+      view: (huntID) ->
+        get('/hunt.json')
+          .success (hunt) ->
+            service.properties.view()
+              .success (property) ->
+                hunt.properties.push property
 
-.service 'session', (hunt) ->
-  session:
-    user: {}
-
-  hunt.users.view (1)
-    .success (data) ->
-      session.user = data
 

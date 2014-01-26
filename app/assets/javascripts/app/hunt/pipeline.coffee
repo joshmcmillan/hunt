@@ -16,27 +16,28 @@ angular.module('hunt')
   hunt.properties.list (data) ->
     $scope.properties = data
 
-.directive 'property-card', ->
+.directive 'propertyCard', ->
+  restrict: 'E'
+  scope:
+    property: '='
   template: """
-    <a ui-sref="property.view, {id: property.id}">
-      <img ng-src="{{property.images[0].src}}>
+    <a ui-sref="property.view({id: property.id})">
+      <img ng-src="{{property.photos[0].url}}">
       <h2>{{property.name}}</h2>
+      <h3>by {{property.agent.name}}</h3>
       <p>Attributes
     </a>
   """
-  scope:
-    property: '='
 
-.directive 'property-list', ->
-  template: """
-    <button ng-click="predicate = 'favourite'">Favourite</button>
-    <button ng-click="predicate = 'price'">Price</button>
-    <button ng-click="predicate = 'date'">Date</button>
-
-    <property-card property="property"
-      ng-repeat="property in properties|orderBy:predicate">
-    </property-card>
-  """
+.directive 'propertyList', ->
+  restrict: 'E'
   scope:
     properties: '='
+  templateUrl: 'hunt/property/list.html'
+  controller: ($scope) ->
+    $scope.predicates = [
+      {slug: 'favourite', name: 'Favourite'}
+      {slug: 'price', name: 'Price'}
+      {slug: 'date', name: 'Date'}
+    ]
 
