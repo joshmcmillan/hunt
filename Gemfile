@@ -36,3 +36,4 @@ gem 'omniauth-facebook'
 gem 'debugger', group: [:development, :test]
 
 gem 'dotenv-rails'
+

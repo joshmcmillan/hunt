@@ -1,3 +1,6 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require templates
+
+//= require_tree ./vendor
+//= require_tree ./app

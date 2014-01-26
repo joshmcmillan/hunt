@@ -14,5 +14,7 @@ Bundler.require(:default, Rails.env)
 module Hunt
   class Application < Rails::Application
     config.sass.preferred_syntax = :sass
+
+    config.initialisers_on_precompile = true
   end
 end
