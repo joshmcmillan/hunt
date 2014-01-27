@@ -18,8 +18,12 @@ angular.module('hunt')
   $stateProvider
     .state 'index',
       url: '/'
-      controller: ($state, session) ->
-        $state.transitionTo 'hunts.list'
+      views:
+        main:
+          controller: ($state, session) ->
+            $state.transitionTo 'hunts.list'
 
   $urlRouterProvider.otherwise '/'
 
+.run ($rootScope, session) ->
+  $rootScope.session = session

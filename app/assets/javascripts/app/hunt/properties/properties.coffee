@@ -5,26 +5,34 @@ angular.module('hunt')
     .state 'properties',
       abstract: true
       url: '/properties'
-      template: """
-        <ui-view/>
-      """
+      views:
+        main:
+          template: """
+            <div ui-view="main"/>
+          """
+        aside:
+          template: """
+            <div ui-view="aside"/>
+          """
 
     .state 'properties.view',
       url: '/:propertyID'
-      controller: 'PropertyViewCtrl'
-      templateUrl: 'hunt/properties/view.html'
+      views:
+        main:
+          controller: 'PropertyViewCtrl'
+          templateUrl: 'hunt/properties/view.html'
 
 .controller 'PropertyListCtrl', ($scope, hunt) ->
   $scope.properties = []
 
-  hunt.properties.list()
+  hunt.api.properties.list()
     .success (data) ->
       $scope.properties = data
 
 .controller 'PropertyViewCtrl', ($scope, $stateParams, hunt) ->
   $scope.property = {}
 
-  hunt.properties.view($stateParams.propertyID)
+  hunt.api.properties.view($stateParams.propertyID)
     .success (data) ->
       $scope.property = data
 

@@ -1,8 +1,11 @@
 script(src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js")
 
-body ng-app="hunt"
+div ng-app="hunt"
   facebook-async
+  google-maps-async
 
-  div ui-view=""
-    h2
-      | Bricks! The view should have loaded here.
+  aside ui-view="aside"
+
+  main ui-view="main"
+    i.fa.fa-5x.fa-spin.fa-cog.center
+

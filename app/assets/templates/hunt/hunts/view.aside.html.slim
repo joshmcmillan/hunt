@@ -1,0 +1,8 @@
+h1 ui-sref="hunts.view({huntID: hunt.id})" {{hunt.name}}
+
+.btn-group-vertical
+    button.btn.btn-info ui-sref="hunts.view.pipeline" Pipeline
+    button.btn.btn-info ui-sref="hunts.view.map" Map
+
+div ui-view="aside"
+

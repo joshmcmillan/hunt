@@ -1,4 +1,75 @@
-.gallery
+@mixin calc($property, $expression)
+  #{$property}: -moz-calc(#{$expression})
+  #{$property}: -o-calc(#{$expression})
+  #{$property}: -webkit-calc(#{$expression})
+  #{$property}: calc(#{$expression})
+
+*
+  box-sizing: border-box
+
+body
+
+google-map
+  position: absolute
+  height: 100%
+  width: 100%
+
+.properties-view
+  overflow: hidden
+
+  .gallery
+    position: absolute
+    height: 50%
+    width: 100%
+    bottom: 0
+    right: 0
+    img
+      height: 100%
+      display: inline-block
+
+  google-map
+    position: absolute
+    height: 50%
+    width: 50%
+    top: 0
+    right: 0
+
+main
+  background-color: #eee
+
+  position: absolute
+  top: 50px
+  right: 0
+
+  +calc(width, '100% - 200px')
+  +calc(height, '100% - 50px')
+
+aside
+  background-color: #222
+
+  position: absolute
+  top: 50px
+  left: 0
+
+  width: 200px
+  +calc(height, '100% - 50px')
+
+
+aside
+  padding: 10px
+  .btn-group-vertical
+    width: 100%
+    margin-bottom: 10px
+
+property-card
   img
-    height: 200px
-    display: inline-block
+    max-width: 100px
+    max-height: 100px
+
+.fa.fa-cog.fa-5x.center
+  position: absolute
+  top: 50%
+  left: 50%
+  margin:
+    left: -30px
+    top: -36px

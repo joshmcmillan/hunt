@@ -1,0 +1,7 @@
+.btn-group-vertical
+  button.btn.btn-warning[
+    ng-repeat="filter in session.huntsMapFilters"
+    ng-click="filter.flag = !filter.flag"
+    ng-class="{active: filter.flag}"
+  ] {{filter.name}}
+

@@ -4,16 +4,18 @@ angular.module('hunt')
   $stateProvider
     .state 'hunts.view.pipeline',
       url: '/pipeline'
-      controller: 'PipelineCtrl'
-      #templateUrl: 'hunt/pipeline.html'
-      template: """
-        <property-list properties="hunt.properties"></property-list>
-      """
+      views:
+        main:
+          controller: 'PipelineCtrl'
+          templateUrl: 'hunt/hunts/views/pipeline.html'
+        aside:
+          templateUrl: 'hunt/hunts/views/pipeline.aside.html'
 
-.controller 'PipelineCtrl', ($scope, hunt) ->
+.controller 'PipelineCtrl', ($scope, session) ->
+  session.huntsView = 'pipeline'
   return
   $scope.properties = []
 
-  hunt.properties.list (data) ->
+  hunt.api.properties.list (data) ->
     $scope.properties = data
 

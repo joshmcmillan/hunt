@@ -37,3 +37,4 @@ gem 'debugger', group: [:development, :test]
 
 gem 'dotenv-rails'
 
+gem 'font-awesome-sass'
