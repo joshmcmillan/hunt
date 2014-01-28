@@ -38,9 +38,7 @@ angular.module('hunt')
           templateUrl: 'hunt/hunts/list.html'
         aside:
           controller: 'HuntListCtrl'
-          template: """
-            <div ui-view="aside"/>
-          """
+          templateUrl: 'hunt/hunts/list.aside.html'
 
 .run (session) ->
   session.huntsView = 'pipeline'

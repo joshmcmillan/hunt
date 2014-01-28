@@ -5,19 +5,34 @@ angular.module('hunt')
     .state 'users',
       abstract: true
       url: '/users'
-      template: """
-        <ui-view/>
-      """
+      views:
+        main:
+          template: """
+            <div ui-view="main"/>
+          """
+        aside:
+          template: """
+          <div ui-view="aside"/>
+        """
+
+    .state 'users.list',
+      url: ''
+      views:
+        main:
+          controller: 'UserViewCtrl'
+          templateUrl: 'hunt/users/list.html'
 
     .state 'users.view',
       url: '/:userID'
-      controller: 'UserViewCtrl'
-      templateUrl: 'hunt/users/view.html'
+      views:
+        main:
+          controller: 'UserViewCtrl'
+          templateUrl: 'hunt/users/view.html'
 
-.controller 'UsersViewCtrl', ($scope, $stateParams, hunt) ->
+.controller 'UserViewCtrl', ($scope, $stateParams, hunt) ->
   $scope.user = {}
 
-  hunt.users.view($stateParams.userID)
+  hunt.api.users.view($stateParams.userID)
     .success (data) ->
       $scope.user = data
 

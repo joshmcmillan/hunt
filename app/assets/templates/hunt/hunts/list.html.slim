@@ -1,7 +1,5 @@
 h1 Hunts
 
-button.btn.btn-success ui-sref="hunts.create" + new hunt
-
 ul.hunts-list
   li ng-repeat="hunt in hunts"
     h2
@@ -14,5 +12,5 @@ ul.hunts-list
       li ng-repeat="user in hunt.users"
         a ui-sref="users.view({userID: user.id})"
           img ng-src="{{user.picture}}"
-          | {{user.firstName}} {{user.lastName}}
+          | {{user.firstName}}
 

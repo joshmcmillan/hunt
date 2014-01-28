@@ -3,16 +3,15 @@
     h2
       | {{property.name}}
 
-    p some
-    p details
-    p here
+    p agent card
 
+    p Mini pipeline
+
+    attribute ng-repeat="attribute in property.attributes"
 
   .gallery
     img ng-src="{{photo.url}}" ng-repeat="photo in property.photos"
 
   google-map area="property.location"
 
-  dl
-    attribute ng-repeat="attribute in property.attributes"
 

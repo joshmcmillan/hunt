@@ -6,6 +6,8 @@ angular.module('hunt', [
   'facebook'
   'socket.io'
   'google.maps'
+
+  'drag-n-drop'
 ])
 
 angular.module('hunt')

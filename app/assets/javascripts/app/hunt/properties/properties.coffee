@@ -21,6 +21,15 @@ angular.module('hunt')
         main:
           controller: 'PropertyViewCtrl'
           templateUrl: 'hunt/properties/view.html'
+        aside:
+          templateUrl: 'hunt/properties/view.aside.html'
+
+.run (session, $rootScope) ->
+    $rootScope.propertyPredicates = session.propertyPredicates = [
+      {slug: 'favourite', name: 'Favourite'}
+      {slug: 'price', name: 'Price'}
+      {slug: 'date', name: 'Date'}
+    ]
 
 .controller 'PropertyListCtrl', ($scope, hunt) ->
   $scope.properties = []
@@ -35,6 +44,12 @@ angular.module('hunt')
   hunt.api.properties.view($stateParams.propertyID)
     .success (data) ->
       $scope.property = data
+
+.directive 'propertyThumb', ->
+  restrict: 'E'
+  scope:
+    property: '='
+  templateUrl: "hunt/properties/thumb.html"
 
 .directive 'propertyCard', ->
   restrict: 'E'

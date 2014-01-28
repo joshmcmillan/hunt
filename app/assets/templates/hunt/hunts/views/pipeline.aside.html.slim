@@ -1,5 +1,6 @@
 .btn-group-vertical
-  button.btn.btn-warning Thing 1
-  button.btn.btn-warning Thing 2
-  button.btn.btn-warning Thing 3
+  button.btn.btn-warning [
+    ng-repeat="p in propertyPredicates track by $index"
+    ng-click="predicate = p.slug"
+  ] {{p.name}}
 

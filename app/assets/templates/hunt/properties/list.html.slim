@@ -1,7 +1,4 @@
-.btn-group
-  button.btn.btn-default [
-    ng-repeat="p in predicates track by $index"
-    ng-click="predicate = p.slug"
-  ] {{p.name}}
-
-property-card property="property" ng-repeat="property in properties|orderBy:predicate">
+property-card[
+  property="property"
+  ng-repeat="property in properties|orderBy:predicate"
+]

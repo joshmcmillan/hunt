@@ -1,8 +1,20 @@
 h1 ui-sref="hunts.view({huntID: hunt.id})" {{hunt.name}}
 
 .btn-group-vertical
-    button.btn.btn-info ui-sref="hunts.view.pipeline" Pipeline
-    button.btn.btn-info ui-sref="hunts.view.map" Map
+  button.btn.btn-success ui-sref="hunts.view.properties.create"
+    i.fa.fa-lg.fa-plus.pull-left
+    New Property
+
+.btn-group-vertical
+    button.btn.btn-info ui-sref="hunts.view.pipeline"
+      i.fa.fa-lg.fa-fw.fa-bar-chart-o.fa-rotate-180.pull-left
+      | Pipeline
+    button.btn.btn-info ui-sref="hunts.view.map"
+      i.fa.fa-lg.fa-fw.fa-map-marker.pull-left
+      | Map
+    button.btn.btn-info ui-sref="hunts.view.list"
+      i.fa.fa-lg.fa-fw.fa-list.pull-left
+      | List
 
 div ui-view="aside"
 
