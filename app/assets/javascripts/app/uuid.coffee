@@ -1,4 +1,4 @@
-angular.module('uuid', [])
+angular.module 'uuid', []
 
 .factory 'uuid', ->
   hex8 = (dashed) ->

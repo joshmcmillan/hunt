@@ -1,6 +1,6 @@
-angular.module('session', [
+angular.module 'session', [
   'ui.router'
-])
+]
 
 .config ($stateProvider, $urlRouterProvider) ->
   $stateProvider

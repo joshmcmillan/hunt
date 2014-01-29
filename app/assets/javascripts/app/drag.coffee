@@ -1,6 +1,6 @@
-angular.module('drag-n-drop', [
+angular.module 'drag-n-drop', [
   'uuid'
-])
+]
 
 .directive 'draggable', ($rootScope, uuid) ->
   restrict: 'A'
