@@ -1,6 +1,6 @@
-angular.module 'facebook', []
+angular.module('facebook', [])
 
-.provider 'facebook', ->
+.provider('facebook', ->
   @.config =
     appId      : undefined # App ID
     channelUrl : '/facebook.channel.html' # Channel File
@@ -101,8 +101,9 @@ angular.module 'facebook', []
     facebook
 
   @
+)
 
-.directive 'facebookAsync', ['$window', 'facebook', ($window, facebook) ->
+.directive('facebookAsync', ['$window', 'facebook', ($window, facebook) ->
   restrict: 'EA'
   transclude: true
   template: """
@@ -120,10 +121,10 @@ angular.module 'facebook', []
         id: id
         src: "//connect.facebook.net/en_gb/all.js"
       ).appendTo '#fb-root'
-]
+])
 
-.run ['facebook', '$rootScope', '$window', (facebook, $rootScope, $window) ->
+.run(['facebook', '$rootScope', '$window', (facebook, $rootScope, $window) ->
   facebook.init $window.FB if $window.FB
 
   $rootScope.facebook = facebook
-]
+])
