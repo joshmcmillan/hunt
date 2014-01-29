@@ -1,0 +1,22 @@
+[ui-view="main"].ng-enter,
+[ui-view="main"].ng-leave
+  position: absolute
+  left: 0
+  right: 0
+  -webkit-transition: all .5s ease-in-out
+
+[ui-view="main"].ng-enter
+  border: solid 5px red
+  -webkit-transform: translate3d(100%, 0, 0)
+
+[ui-view="main"].ng-enter-active
+  border: solid 5px blue
+  -webkit-transform: translate3d(0, 0, 0)
+
+[ui-view="main"].ng-leave
+  border: solid 5px green
+  -webkit-transform: translate3d(0, 0, 0)
+
+[ui-view="main"].ng-leave-active
+  border: solid 5px green
+  -webkit-transform: translate3d(-100%, 0, 0)

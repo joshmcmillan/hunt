@@ -1,3 +1,13 @@
+@mixin left-shadow
+  box-shadow: -10px 0 0 0 rgba(0,0,0,0.15)
+
+@mixin bottom-shadow
+  box-shadow: 0 10px 0 0 rgba(0,0,0,0.15)
+
+@mixin bottom-left-shadow
+  box-shadow: -10px 10px 0 0 rgba(0,0,0,0.15)
+
+
 @mixin calc($property, $expression)
   #{$property}: -moz-calc(#{$expression})
   #{$property}: -o-calc(#{$expression})
@@ -15,6 +25,12 @@ google-map
 .properties-view
   overflow: hidden
 
+  .details
+    position: absolute
+    width: 50%
+    height: 50%
+    z-index: 750
+
   .gallery
     position: absolute
     width: 50%
@@ -22,9 +38,11 @@ google-map
     top: 0
     right: 0
     overflow-y: scroll
+    z-index: 1000
     img
       width: 100%
       display: block
+
 
   google-map
     position: absolute
@@ -32,6 +50,14 @@ google-map
     width: 50%
     bottom: 0
     left: 0
+
+  google-map,
+  .gallery
+    -webkit-transition: 0.3s
+
+  &.slideshow
+    .gallery
+      width: 100%
 
 main
   background-color: #eee
@@ -44,6 +70,7 @@ main
   +calc(height, '100% - 50px')
 
 aside
+  color: #fff
   background-color: #222
 
   position: absolute
@@ -51,14 +78,22 @@ aside
   left: 0
 
   width: 200px
+
   +calc(height, '100% - 50px')
+
+  overflow-y: scroll
+
 
 
 aside
-  padding: 10px
+  // padding: 10px
+
   .btn-group-vertical
     width: 100%
     margin-bottom: 10px
+
+    .btn
+      border-radius: 0 !important
 
 property-card
   img
@@ -81,18 +116,55 @@ property-card
     right: 0
 
 .pipeline
-  padding: 5px
-  .stage
-    display: inline-block
-    vertical-align: top
-    width: 20%
-    padding: 5px
+  height: 100%
 
-    .panel-body
-      padding: 0
+@mixin stage($index)
+  &:nth-child(#{$index})
+    left: 20% * ($index - 1)
+    z-index: $index * 100
+    //background-color: lighten(#222, 15% * $index)
+    //background-color: #222
+    //background-color: white
 
-    property-thumb
-      display: block
-      img
-        width: 100%
+.stage
+  position: absolute
+  vertical-align: top
+  height: 100%
+  width: 20%
+  overflow-y: scroll
 
+  +stage(1)
+  +stage(2)
+  +stage(3)
+  +stage(4)
+  +stage(5)
+
+  border-left: dashed 10px #fff
+  &:hover
+    border-left: solid 10px #fff
+  color: #fff
+  background-color: #333
+
+  h2
+    text-align: center
+
+  property-thumb
+    display: block
+    img
+      width: 100%
+
+//google-map,
+.stage,
+.properties-view,
+.gallery,
+.hunts-list,
+.hunts-list li,
+.hunts-view-map
+  +left-shadow
+  +bottom-left-shadow
+
+.details
+  //+bottom-left-shadow
+
+.navbar
+  +bottom-shadow

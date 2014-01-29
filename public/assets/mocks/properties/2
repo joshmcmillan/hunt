@@ -1,5 +1,5 @@
 {
-  "id": 1,
+  "id": 2,
   "name": "Amhurst Road",
   "agent": {
     "name": "Felicity J Lord",
@@ -14,18 +14,18 @@
   },
   "photos": [
     {
-      "url": "http://bukk.it/cabinparty.gif",
+      "url": "http://bukk.it/BEARPOCALYPSE.gif",
       "caption": "i like turtles",
       "source": "agent"
     },
     {
-      "url": "http://bukk.it/casualfriday.jpg",
+      "url": "http://bukk.it/OoO.gif",
       "caption": "i also like turtles",
       "source": "upload"
     }
   ],
   "enquired": true,
-  "agentReplied": false,
+  "agentReplied": true,
   "viewed": false,
   "liked": false,
   "disliked": false

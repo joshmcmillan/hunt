@@ -1,4 +1,4 @@
-angular.module('hunt', [
+angular.module 'hunt', [
   'ui.router'
   'templates'
   'session'
@@ -8,9 +8,7 @@ angular.module('hunt', [
   'google.maps'
 
   'drag-n-drop'
-])
-
-angular.module('hunt')
+]
 
 .config (facebookProvider) ->
   facebookProvider.config.appId = 653928358000497

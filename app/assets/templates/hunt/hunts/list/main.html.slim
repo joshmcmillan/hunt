@@ -1,0 +1,17 @@
+ul.hunts-list
+  li ng-repeat="hunt in hunts"
+    .details
+      h2
+        a ui-sref="hunts.view({huntID: hunt.id})"
+          | {{hunt.name}}
+
+    .users
+      a[
+        ui-sref="users.view({userID: user.id})"
+        ng-repeat="user in hunt.users"
+      ]
+        img ng-src="{{user.picture}}" title="{{user.firstName}}"
+
+    google-map area="hunt.area"
+
+

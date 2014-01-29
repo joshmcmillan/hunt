@@ -7,30 +7,30 @@ angular.module('hunt')
       views:
         main:
           controller: 'PipelineCtrl'
-          templateUrl: 'hunt/hunts/views/pipeline.html'
+          templateUrl: 'hunt/hunts/view/pipeline/main.html'
         aside:
-          templateUrl: 'hunt/hunts/views/pipeline.aside.html'
+          templateUrl: 'hunt/hunts/view/pipeline/aside.html'
 
 .controller 'PipelineCtrl', ($scope, session) ->
   session.huntsView = 'pipeline'
 
   $scope.stages = [
-    'interested'
-    'enquired'
-    'agentReplied'
-    'viewed'
-    'uavailable'
+    {key: 'interested',   name: 'Interested'}
+    {key: 'enquired',     name: 'Enquired'}
+    {key: 'agentReplied', name: 'Replied'}
+    {key: 'viewed',       name: 'Viewed'}
+    {key: 'unavailable',  name: 'Ditched'}
   ]
 
   $scope.pipeline = {}
 
   for stage in $scope.stages
-    $scope.pipeline[stage] = []
+    $scope.pipeline[stage.key] = []
 
   $scope.$watch 'hunt.properties', ->
     console.log 'hunt.properties', $scope.hunt.properties
     for property in $scope.hunt.properties || []
-      $scope.pipeline[property.stage || $scope.stages[0]].push property
+      $scope.pipeline[property.stage || $scope.stages[0].key].push property
   , true
 
   return

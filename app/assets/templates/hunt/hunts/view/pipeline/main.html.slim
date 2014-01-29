@@ -1,0 +1,15 @@
+.pipeline
+  .stage[
+    ng-repeat="stage in stages"
+    drop-target="true"
+    on-drop="pipelineUpdate(stage.key)"
+  ]
+
+    h2
+      | {{stage.name}}
+
+    property-thumb[
+      ng-repeat="property in pipeline[stage.key]"
+      draggable="true"
+      property="property"
+    ]

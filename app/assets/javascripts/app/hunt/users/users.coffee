@@ -20,14 +20,14 @@ angular.module('hunt')
       views:
         main:
           controller: 'UserViewCtrl'
-          templateUrl: 'hunt/users/list.html'
+          templateUrl: 'hunt/users/list/main.html'
 
     .state 'users.view',
       url: '/:userID'
       views:
         main:
           controller: 'UserViewCtrl'
-          templateUrl: 'hunt/users/view.html'
+          templateUrl: 'hunt/users/view/main.html'
 
 .controller 'UserViewCtrl', ($scope, $stateParams, hunt) ->
   $scope.user = {}

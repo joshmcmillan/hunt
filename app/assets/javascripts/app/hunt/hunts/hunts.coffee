@@ -17,43 +17,46 @@ angular.module('hunt')
 
     .state 'hunts.create',
       url: '/new'
-      controller: 'HuntCreateCtrl'
-      templateUrl: 'hunt/hunts/create.html'
+      views:
+        main:
+          controller: 'HuntCreateCtrl'
+          templateUrl: 'hunt/hunts/create/main.html'
 
     .state 'hunts.view',
       url: '/:huntID'
       views:
         main:
-          templateUrl: 'hunt/hunts/view.html'
+          templateUrl: 'hunt/hunts/view/main.html'
           controller: 'HuntViewCtrl'
         aside:
-          templateUrl: 'hunt/hunts/view.aside.html'
-          #controller: 'HuntViewAsideCtrl'
+          templateUrl: 'hunt/hunts/view/aside.html'
+          controller: 'HuntViewAsideCtrl'
 
     .state 'hunts.list',
       url: ''
       views:
         main:
           controller: 'HuntListCtrl'
-          templateUrl: 'hunt/hunts/list.html'
+          templateUrl: 'hunt/hunts/list/main.html'
         aside:
           controller: 'HuntListCtrl'
-          templateUrl: 'hunt/hunts/list.aside.html'
+          templateUrl: 'hunt/hunts/list/aside.html'
 
 .run (session) ->
   session.huntsView = 'pipeline'
 
 .controller 'HuntViewCtrl', ($scope, $state, $stateParams, hunt, session) ->
-  $scope.hunt = {}
+  $scope.hunt = session.hunt = {}
 
   hunt.api.hunts.view($stateParams.huntID)
     .success (data) ->
-      $scope.hunt = data
-
-  console.log "TEST", $state.is 'hunts.view'
+      $scope.hunt = session.hunt = data
 
   if $state.is 'hunts.view'
     $state.transitionTo "hunts.view.#{session.huntsView}", $stateParams
+
+.controller 'HuntViewAsideCtrl', ($scope, session) ->
+  $scope.hunt = session.hunt
 
 .controller 'HuntListCtrl', ($scope, session, hunt) ->
   $scope.hunts = []

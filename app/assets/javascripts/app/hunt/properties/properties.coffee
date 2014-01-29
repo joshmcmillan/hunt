@@ -20,9 +20,9 @@ angular.module('hunt')
       views:
         main:
           controller: 'PropertyViewCtrl'
-          templateUrl: 'hunt/properties/view.html'
+          templateUrl: 'hunt/properties/view/main.html'
         aside:
-          templateUrl: 'hunt/properties/view.aside.html'
+          templateUrl: 'hunt/properties/view/aside.html'
 
 .run (session, $rootScope) ->
     $rootScope.propertyPredicates = session.propertyPredicates = [
@@ -44,6 +44,11 @@ angular.module('hunt')
   hunt.api.properties.view($stateParams.propertyID)
     .success (data) ->
       $scope.property = data
+
+.directive 'propertyProgress', ->
+  restrict: 'E'
+  scope:
+    stage: '='
 
 .directive 'propertyThumb', ->
   restrict: 'E'

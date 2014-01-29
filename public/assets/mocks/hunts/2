@@ -1,0 +1,20 @@
+{
+  "id": 2,
+  "name": "Cheap Ass Crib Seek",
+  "targetBeds": 2,
+  "targetCost": {
+    "unit": "weekly",
+    "value": 250
+  },
+  "area": {
+    "name": "Shoreditch",
+    "latitude": 51.523728,
+    "longitude": -0.079336,
+    "radius": 3
+  },
+  "users": [
+  ],
+  "properties": [
+  ]
+}
+

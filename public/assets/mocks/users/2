@@ -1,0 +1,12 @@
+{
+  "id": 2,
+  "facebookID": "1412910151",
+  "firstName": "Jesse",
+  "lastName": "Zwaan",
+  "picture": "https://graph.facebook.com/1412910151/picture",
+  "commuteLocation": {
+    "name": "172 Arlington Road, Camden, NW1 7HL",
+    "latitude": 51.5388,
+    "longitude": -0.1439
+  }
+}

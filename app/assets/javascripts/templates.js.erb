@@ -1,7 +1,6 @@
 <% environment.context_class.instance_eval { include ActionView::Helpers::JavaScriptHelper } %>
 angular.module('templates', []).run( ['$templateCache', function ($templateCache) {
   <% TEMPLATE_DIR = Rails.root.join('app', 'assets', 'templates') %>
-
   <% [
     {ext: 'haml', chop: true,  render: Proc.new { |f| Haml::Engine.new(File.read(f)).render }},
     {ext: 'slim', chop: true,  render: Proc.new { |f| Slim::Template.new(f).render }},

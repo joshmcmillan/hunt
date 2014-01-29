@@ -6,45 +6,50 @@ angular.module('hunt')
       method: 'get'
       url: '/assets/mocks' + url
 
+  lister = (resource) ->
+    ->
+      dfd = $q.defer()
+
+      list = []
+      count = 0
+      for i in [1, 2]
+        service.api[resource].view(i)
+          .success (data) ->
+            count++
+            list.push data
+            console.log resource, count, data
+            if count is 2
+               dfd.resolve list
+
+      success:
+        dfd.promise.then
+      error:
+        dfd.promise.catch
+
   service =
     api:
       properties:
-        list: ->
-          get '/properties.json'
-
-        view: (properyID) ->
-          get '/property.json'
+        list: lister 'properties'
+        view: (propertyID) ->
+          get "/properties/#{propertyID}"
 
       users:
+        list: lister 'users'
         view: (userID) ->
-          get '/user.json'
+          get "/users/#{userID}"
 
       hunts:
-        list: (userID) ->
-          dfd = $q.defer()
-
-          get('/hunt.json')
-          service.api.hunts.view()
-            .success (hunt) ->
-              dfd.resolve [hunt]
-            .error (data) ->
-              dfd.reject data
-
-          success:
-            dfd.promise.then
-          error:
-            dfd.promise.catch
-
+        list: lister 'hunts'
         view: (huntID) ->
-          get('/hunt.json')
+          get("/hunts/#{huntID}")
             .success (hunt) ->
-              service.api.properties.view()
-                .success (property) ->
-                  hunt.properties.push property
+              service.api.properties.list()
+                .success (properties) ->
+                  hunt.properties = properties
 
-              service.api.users.view()
-                .success (user) ->
-                  hunt.users.push user
+              service.api.users.list()
+                .success (users) ->
+                  hunt.users = users
 
 
 

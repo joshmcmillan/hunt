@@ -1,4 +1,4 @@
-.properties-view
+.properties-view ng-class="{slideshow: !!slideshow}"
   .details
     h2
       | {{property.name}}
@@ -7,9 +7,10 @@
 
     p Mini pipeline
 
+
     attribute ng-repeat="attribute in property.attributes"
 
-  .gallery
+  .gallery ng-click="slideshow = !slideshow"
     img ng-src="{{photo.url}}" ng-repeat="photo in property.photos"
 
   google-map area="property.location"

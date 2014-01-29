@@ -7,10 +7,10 @@ angular.module('hunt')
       views:
         main:
           #controller: 'MapCtrl'
-          templateUrl: 'hunt/hunts/views/map.html'
+          templateUrl: 'hunt/hunts/view/map/main.html'
         aside:
           controller: 'MapAsideCtrl'
-          templateUrl: 'hunt/hunts/views/map.aside.html'
+          templateUrl: 'hunt/hunts/view/map/aside.html'
 
 .run (session) ->
   session.huntsMapFilters = [
