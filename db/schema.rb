@@ -11,10 +11,101 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122220643) do
+ActiveRecord::Schema.define(version: 20140130222528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: true do |t|
+    t.string   "title",            limit: 50, default: ""
+    t.text     "comment"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.integer  "user_id"
+    t.string   "role",                        default: "comments"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "contacts", force: true do |t|
+    t.integer  "property_id"
+    t.string   "name"
+    t.string   "phone"
+    t.string   "url"
+    t.string   "company_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["property_id"], name: "index_contacts_on_property_id", using: :btree
+
+  create_table "hunt_users", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "hunt_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hunt_users", ["hunt_id"], name: "index_hunt_users_on_hunt_id", using: :btree
+  add_index "hunt_users", ["user_id"], name: "index_hunt_users_on_user_id", using: :btree
+
+  create_table "hunts", force: true do |t|
+    t.integer  "target_beds"
+    t.string   "target_cost_unit"
+    t.integer  "target_cost_value"
+    t.string   "location"
+    t.decimal  "latitude",          precision: 10, scale: 6
+    t.decimal  "longitude",         precision: 10, scale: 6
+    t.decimal  "distance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  create_table "properties", force: true do |t|
+    t.integer  "hunt_id"
+    t.string   "name"
+    t.string   "location"
+    t.decimal  "latitude",      precision: 10, scale: 6
+    t.decimal  "longitude",     precision: 10, scale: 6
+    t.boolean  "enquired"
+    t.boolean  "agent_replied"
+    t.boolean  "viewed"
+    t.datetime "viewing_time"
+    t.boolean  "liked"
+    t.boolean  "disliked"
+    t.boolean  "unavailable"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "properties", ["hunt_id"], name: "index_properties_on_hunt_id", using: :btree
+
+  create_table "property_attributes", force: true do |t|
+    t.integer  "property_id"
+    t.string   "key"
+    t.text     "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "property_attributes", ["property_id"], name: "index_property_attributes_on_property_id", using: :btree
+
+  create_table "property_media", force: true do |t|
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "property_media", ["property_id"], name: "index_property_media_on_property_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

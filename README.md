@@ -1,4 +1,4 @@
-# Hunt
+# HuntApp
 
 This will be a README, for now it's a DONTREADMEBECAUSETHEREISNOTHINGHERE.
 

@@ -38,3 +38,6 @@ gem 'debugger', group: [:development, :test]
 gem 'dotenv-rails'
 
 gem 'font-awesome-sass'
+
+gem 'acts_as_commentable'
+gem 'paperclip', '~> 3.0'

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
          omniauth_providers: [:facebook]
 
+  has_many :hunts, through: :hunt_users
+
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, provider_uid: auth.uid).first_or_initialize.tap do |user|
       user.provider     = auth.provider
@@ -20,4 +22,10 @@ class User < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
+  def avatar
+    return nil if provider != 'facebook'
+
+    "//graph.facebook.com/#{provider_uid}/picture"
+  end 
 end

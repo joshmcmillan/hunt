@@ -4,7 +4,7 @@ angular.module('hunt')
   get = (url) ->
     $http
       method: 'get'
-      url: '/assets/mocks' + url
+      url: '/api/v1' + url
 
   lister = (resource) ->
     ->
@@ -39,17 +39,10 @@ angular.module('hunt')
           get "/users/#{userID}"
 
       hunts:
-        list: lister 'hunts'
+        list: ->
+          get "/hunts.json"
         view: (huntID) ->
-          get("/hunts/#{huntID}")
-            .success (hunt) ->
-              service.api.properties.list()
-                .success (properties) ->
-                  hunt.properties = properties
-
-              service.api.users.list()
-                .success (users) ->
-                  hunt.users = users
+          get "/hunts/#{huntID}.json"
 
 
 
