@@ -1,0 +1,15 @@
+table.table.table-bordered
+  thead
+    tr
+      td Name
+      td ng-repeat="attr in attributes"
+          | {{attr.name}}
+  tbody
+    tr ng-repeat="property in hunt.properties"
+      td ui-sref="properties.view({propertyID: property.id})"
+        | {{property.name}}
+      td[
+        ng-repeat="attr in attributes"
+        ng-class="{true: 'success', false: 'danger'}[property[attr.key]]"
+      ]
+        | {{property[attr.key]}}

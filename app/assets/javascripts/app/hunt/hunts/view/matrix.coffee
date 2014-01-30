@@ -12,4 +12,11 @@ angular.module('hunt')
           templateUrl: 'hunt/hunts/view/matrix/aside.html'
 
 .controller 'MatrixCtrl', ($scope, session) ->
-  undefined
+  $scope.attributes = [
+    {key: 'interested',   name: 'Interested'}
+    {key: 'enquired',     name: 'Enquired'}
+    {key: 'agentReplied', name: 'Replied'}
+    {key: 'viewed',       name: 'Viewed'}
+    {key: 'unavailable',  name: 'Ditched'}
+  ]
+

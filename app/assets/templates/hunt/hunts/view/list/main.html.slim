@@ -1,0 +1,9 @@
+ul.properties-list
+  li[
+    ng-repeat="property in hunt.properties"
+    ui-sref="properties.view({propertyID: property.id})"
+  ]
+    .details style="background-image: url({{property.images[0].url}}); background-size: cover"
+    h2
+      | {{property.name}}
+    google-map area="property.location"
