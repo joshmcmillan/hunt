@@ -4,7 +4,25 @@ angular.module('hunt')
   get = (url) ->
     $http
       method: 'get'
+      url: "/api/v1#{url}.json"
+
+  post = (url, data) ->
+    $http
+      method: 'post'
       url: '/api/v1' + url
+      data: data
+
+  put = (url, data) ->
+    $http
+      method: 'put'
+      url: '/api/v1' + url
+      data: data
+
+  del = (url, data) ->
+    $http
+      method: 'delete'
+      url: '/api/v1' + url
+      data: data
 
   lister = (resource) ->
     ->
@@ -28,21 +46,31 @@ angular.module('hunt')
 
   service =
     api:
+      hunts:
+        index: ->
+          get "/hunts"
+        show: (huntID) ->
+          get "/hunts/#{huntID}"
+        create: (data) ->
+          post "/hunts", hunt: data
+        update: (huntID, data) ->
+          put "/hunts/#{huntID}", hunt: data
+        destroy: (huntID) ->
+          del "/hunts/#{huntID}"
+
       properties:
-        list: lister 'properties'
-        view: (propertyID) ->
+        index: ->
+          get "/properties"
+        show: (propertyID) ->
           get "/properties/#{propertyID}"
+        create: (data) ->
+          post "/properties", property: data
 
       users:
-        list: lister 'users'
-        view: (userID) ->
+        index: ->
+          get "/users"
+        show: (userID) ->
           get "/users/#{userID}"
-
-      hunts:
-        list: ->
-          get "/hunts.json"
-        view: (huntID) ->
-          get "/hunts/#{huntID}.json"
-
-
+        create: (data) ->
+          post "/users", user: data
 

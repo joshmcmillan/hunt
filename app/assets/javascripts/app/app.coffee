@@ -10,6 +10,10 @@ angular.module('hunt', [
   'drag-n-drop'
 ])
 
+.config ($httpProvider) ->
+  $httpProvider.defaults.headers.common['X-CSRF-Token'] =
+    $('meta[name=csrf-token]').attr('content')
+
 .config (facebookProvider) ->
   facebookProvider.config.appId = 653928358000497
   facebookProvider.config.channelUrl = '/facebook.channel.html'

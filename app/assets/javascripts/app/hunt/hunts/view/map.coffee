@@ -1,6 +1,10 @@
 angular.module('hunt')
 
 .config ($stateProvider, $urlRouterProvider) ->
+  $resourceRouterProvider.mount $stateProvider,
+    path: ['hunts', 'show', 'map']
+    views: ['show']
+
   $stateProvider
     .state 'hunts.view.map',
       url: '/map'
