@@ -1,9 +1,30 @@
 form ng-submit="submit()"
-  label for="form-name" Name
-  input id="form-name" type="text" ng-model="hunt.name" placeholder="Name"
+  .form-group
+    label for="form-target-beds" Target beds
+    input.form-control id="form-target-beds" type="number" ng-model="hunt.target_beds" placeholder="e.g. 2"
 
-  label for="form-hunters" Hunters
-  textarea id="form-hunters"
+  .form-group
+    label for="form-target-beds" Target cost value
+    input.form-control id="form-target-cost-value" type="number" ng-model="hunt.target_cost_value" placeholder="e.g. 400"
+
+  input type="hidden" name="target_cost_unit" value="weekly"
+
+  .form-group
+    label for="form-location" Location
+    input.form-control id="form-location" type="text" ng-model="hunt.location" placeholder="Name"
+
+  .form-group
+    label for="form-longitude" Longitude
+    input.form-control id="form-longitude" type="text" ng-model="hunt.longitude" placeholder="e.g. 52.102380"
+
+  .form-group
+    label for="form-latitude" Latitude
+    input.form-control id="form-latitude" type="text" ng-model="hunt.latitude" placeholder="e.g. 54.425470"
+
+  .form-group
+    label for="form-distance" Distance
+    input.form-control id="form-distance" type="number" ng-model="hunt.distance" placeholder="e.g. 5"
+
 
   input class="btn btn-success" type="submit" value="Submit"
   button class="btn btn-default" type="button" ui-sref="hunts.index" Cancel

@@ -26,13 +26,12 @@ angular.module('hunt')
 .controller 'HuntsIndexMainCtrl', ($scope, Hunt) ->
   $scope.hunts = []
   Hunt.index().then (hunts) ->
+    console.log 'hunts', hunts
     $scope.hunts = hunts
 
 
-.controller 'HuntsIndexAsideCtrl', ($scope, Hunt) ->
-  $scope.hunts = []
-  Hunt.index().then (hunts) ->
-    $scope.hunts = hunts
+.controller 'HuntsIndexAsideCtrl', ($scope) ->
+  undefined
 
 
 .controller 'HuntsNewMainCtrl', ($scope, Hunt) ->

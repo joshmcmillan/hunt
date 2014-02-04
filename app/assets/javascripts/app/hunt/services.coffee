@@ -4,7 +4,14 @@ angular.module 'hunt'
   new Api '/api/v1'
 
 .factory 'Hunt', (hunt) ->
-  hunt.model 'hunts'
+  Hunt = hunt.model 'hunts'
+
+  Hunt::init = ->
+    @area.latitude = parseFloat @area.latitude
+    @area.longitude = parseFloat @area.longitude
+    @area.distance = parseFloat @area.distance
+
+  Hunt
 
 .factory 'Property', (hunt) ->
   hunt.model 'properties', 'property'

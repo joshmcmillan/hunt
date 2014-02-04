@@ -47,7 +47,7 @@ angular.module 'rest', []
           obj = data[Model.singular] = @
           api.post "/#{Model.plural}", data
           .then (response) ->
-            obj.id = response.id
+            obj.id = response.data.id
 
         update: ->
           data = {}
@@ -57,12 +57,12 @@ angular.module 'rest', []
         @index: ->
           api.get "/#{@plural}"
           .then (response) ->
-            new Model obj for obj in response
+            new Model obj for obj in response.data
 
         @show: (id) ->
           api.get "/#{@plural}/#{id}"
           .then (response) ->
-            new Model response
+            new Model response.data
 
         @destroy: (id) ->
           api.del "/#{@plural}/#{id}"
