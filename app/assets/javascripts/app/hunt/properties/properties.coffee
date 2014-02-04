@@ -1,28 +1,9 @@
-angular.module('hunt')
+angular.module 'hunt'
 
-.config ($stateProvider) ->
-  $stateProvider
-    .state 'properties',
-      abstract: true
-      url: '/properties'
-      views:
-        main:
-          template: """
-            <div ui-view="main"/>
-          """
-        aside:
-          template: """
-            <div ui-view="aside"/>
-          """
-
-    .state 'properties.view',
-      url: '/:propertyID'
-      views:
-        main:
-          controller: 'PropertyViewCtrl'
-          templateUrl: 'hunt/properties/view/main.html'
-        aside:
-          templateUrl: 'hunt/properties/view/aside.html'
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
+    path: ['properties']
+    views: ['index', 'show', 'new', 'edit']
 
 .run (session, $rootScope) ->
     $rootScope.propertyPredicates = session.propertyPredicates = [

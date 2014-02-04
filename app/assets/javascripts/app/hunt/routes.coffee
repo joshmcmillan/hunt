@@ -7,57 +7,61 @@
     templates: ['main', 'aside']
 
 ###
-
-angular.module 'crud', []
+angular.module 'hunt.router'
 
 .provider 'resourceRouter', ->
   defaults =
-    base: 'app'
+    base: 'hunt'
     templates: ['main', 'aside']
     views: ['index', 'show']
     urls:
       index: ""
-      show: "/:id"  #"/:#{singular}ID"
-      create: "/new"
-      destroy: "/:id/delete"  #"/:#{singular}ID/delete"
-      update:"/:id/delete"  #"/:#{singular}ID/edit"
+      show: "/{id:[0-9]}" # TODO nest 'destroy' and 'edit'
+      new: "/new"
+      destroy: "/:id/delete"
+      edit: "/:id/edit"
 
   capitalize = (word) ->
-    word[0].upperCase() + word[1..]
+    word[0].toUpperCase() + word[1..]
 
   camelCase = (words...) ->
-    (capitalize word for word in words).join ''
+    (capitalize word for word in words when word).join ''
 
-  @build = (options) ->  #singular) ->
-    options ||= {}
+  @build = (options) ->
+    options ?= {}
 
-    base = options.base
+    base = options.base || defaults.base
     path = options.path
     templates = options.templates || defaults.templates
     views = options.views || defaults.views
     urls = options.urls || defaults.urls
 
-    #singular ?= plural[...-1] # Strip trailing s from plural unless given
+    resource = options.resource || path[path.length - 1]
 
     buildViews = (view) ->
       obj = {}
       for template in templates
+        segment = path.join '/'
+        segment += "/#{view}" if view
         obj[template] =
-          templateUrl: "#{base}/#{path.join '/'}/#{view}/#{template}.html"
-          controller: camelCase plural, view, template, 'Ctrl'
+          templateUrl: "#{base}/#{segment}/#{template}.html"
+          controller: camelCase resource, view, template, 'Ctrl'
       obj
 
     abstract =
       abstract: true
-      url: "/#{path[-1]}"
+      url: "/#{resource}"
       views: {}
-    for template in options.templates
-      abstract.views[template] = "#{base}/#{path.join '/'}/#{template}.html"
+    for template in templates
+      abstract.views[template] =
+        templateUrl: "#{base}/#{path.join '/'}/#{template}.html"
 
     states = {}
     states[path.join '.'] = abstract
     for view in views
-      states["#{path.join '.'}.#{view}"] =
+      name = path.join '.'
+      name += ".#{view}" if view
+      states[name] =
         url: urls[view]
         views: buildViews view
     states
@@ -65,7 +69,9 @@ angular.module 'crud', []
 
   # this to the $stateProvider
   @mount = ($stateProvider, args...) ->
-    $stateProvider.state name, state for name, state of @build.call args...
+    for name, state of @build.apply @, args
+      $stateProvider.state name, state
+      console.log "$stateProvider", name, state
 
   @.$get = ->
     null

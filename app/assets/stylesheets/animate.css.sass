@@ -20,3 +20,10 @@
 [ui-view="main"].ng-leave-active
   border: solid 5px green
   -webkit-transform: translate3d(-100%, 0, 0)
+
+main
+  -webkit-transition: 0.3s
+
+aside:hover ~ main
+  -webkit-transform: translateX(150px)
+

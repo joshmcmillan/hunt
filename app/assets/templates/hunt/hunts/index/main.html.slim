@@ -2,19 +2,19 @@ ul.hunts-list
   li ng-repeat="hunt in hunts"
     .details
       h2
-        a ui-sref="hunts.view({huntID: hunt.id})"
+        a ui-sref="hunts.show({id: hunt.id})"
           | {{hunt.name}}
 
     .users
       a[
-        ui-sref="users.view({userID: user.id})"
+        ui-sref="users.show({id: user.id})"
         ng-repeat="user in hunt.users"
       ]
         img ng-src="{{user.picture}}" title="{{user.firstName}}"
 
     google-map area="hunt.area"
 
-  li.starter ui-sref="hunts.create"
+  li.starter ui-sref="hunts.new"
     i.fa.fa-lg.fa-plus
     |  New Hunt
 

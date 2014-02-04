@@ -1,20 +1,9 @@
 angular.module('hunt')
 
-.config ($stateProvider, $urlRouterProvider) ->
-  $resourceRouterProvider.mount $stateProvider,
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
     path: ['hunts', 'show', 'map']
-    views: ['show']
-
-  $stateProvider
-    .state 'hunts.view.map',
-      url: '/map'
-      views:
-        main:
-          #controller: 'MapCtrl'
-          templateUrl: 'hunt/hunts/view/map/main.html'
-        aside:
-          controller: 'MapAsideCtrl'
-          templateUrl: 'hunt/hunts/view/map/aside.html'
+    views: ['']
 
 .run (session) ->
   session.huntsMapFilters = [
@@ -30,6 +19,6 @@ angular.module('hunt')
   session.huntsView = 'map'
   #$scope.filters = hunt.hunts.map.filters
 
-.controller 'MapCtrl', ($scope, huntsMap) ->
+.controller 'MapMainCtrl', ($scope, huntsMap) ->
   $scope.filters = hunt.hunts.map.filters
 

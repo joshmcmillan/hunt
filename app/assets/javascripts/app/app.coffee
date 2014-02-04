@@ -1,13 +1,20 @@
+angular.module 'hunt.router', []
+
 angular.module('hunt', [
+  'hunt.router'
+
   'ui.router'
   'templates'
   'session'
+
+  'rest'
 
   'facebook'
   'socket.io'
   'google.maps'
 
   'drag-n-drop'
+
 ])
 
 .config ($httpProvider) ->
@@ -25,7 +32,7 @@ angular.module('hunt', [
       views:
         main:
           controller: ($state, session) ->
-            $state.transitionTo 'hunts.list'
+            $state.transitionTo 'hunts.index'
 
   $urlRouterProvider.otherwise '/'
 

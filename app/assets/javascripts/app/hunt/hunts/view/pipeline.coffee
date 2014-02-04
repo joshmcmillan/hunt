@@ -1,15 +1,10 @@
 angular.module('hunt')
 
-.config ($stateProvider) ->
-  $stateProvider
-    .state 'hunts.view.pipeline',
-      url: '/pipeline'
-      views:
-        main:
-          controller: 'PipelineCtrl'
-          templateUrl: 'hunt/hunts/view/pipeline/main.html'
-        aside:
-          templateUrl: 'hunt/hunts/view/pipeline/aside.html'
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
+    path: ['hunts', 'show', 'pipeline']
+    views: ['']
+    templates: ['main', 'aside']
 
 .controller 'PipelineCtrl', ($scope, session) ->
   session.huntsView = 'pipeline'

@@ -1,74 +1,46 @@
 angular.module('hunt')
 
-.config ($stateProvider) ->
-  $stateProvider
-    .state 'hunts',
-      abstract: true
-      url: '/hunts'
-      shows:
-        main:
-          template: """
-            <div ui-show="main"/>
-          """
-        aside:
-          template: """
-            <div ui-show="aside"/>
-          """
-
-    .state 'hunts.create',
-      url: '/new'
-      shows:
-        main:
-          controller: 'HuntCreateCtrl'
-          templateUrl: 'hunt/hunts/create/main.html'
-
-    .state 'hunts.show',
-      url: '/:huntID'
-      shows:
-        main:
-          templateUrl: 'hunt/hunts/show/main.html'
-          controller: 'HuntShowCtrl'
-        aside:
-          templateUrl: 'hunt/hunts/show/aside.html'
-          controller: 'HuntShowAsideCtrl'
-
-    .state 'hunts.index',
-      url: ''
-      shows:
-        main:
-          controller: 'HuntIndexCtrl'
-          templateUrl: 'hunt/hunts/index/main.html'
-        aside:
-          controller: 'HuntIndexCtrl'
-          templateUrl: 'hunt/hunts/index/aside.html'
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
+    path: ['hunts']
+    views: ['index', 'show', 'new', 'edit']
+    templates: ['main', 'aside']
 
 .run (session) ->
   session.huntsView = 'pipeline'
 
-.controller 'HuntShowCtrl', ($scope, $state, $stateParams, hunt, session) ->
-  $scope.hunt = session.hunt = {}
 
-  hunt.api.hunts.show($stateParams.huntID)
-    .success (data) ->
-      $scope.hunt = session.hunt = data
+.controller 'HuntsShowCtrl', ($scope, $state, $stateParams, Hunt, session) ->
+  $scope.hunt = session.hunt = {}
+  Hunt.show($stateParams.huntID).then (hunt) ->
+    $scope.hunt = session.hunt = hunt
 
   if $state.is 'hunts.show'
-    $state.transitionTo "hunts.show.#{session.huntsShow}", $stateParams
+    $state.transitionTo "hunts.show.#{session.huntsView}", $stateParams
 
-.controller 'HuntShowAsideCtrl', ($scope, session) ->
+
+.controller 'HuntsShowAsideCtrl', ($scope, session) ->
   $scope.hunt = session.hunt
 
-.controller 'HuntIndexCtrl', ($scope, session, hunt) ->
+
+.controller 'HuntsIndexMainCtrl', ($scope, Hunt) ->
   $scope.hunts = []
+  Hunt.index().then (hunts) ->
+    $scope.hunts = hunts
 
-  hunt.api.hunts.index() #session.user.id)
-    .success (data) ->
-      $scope.hunts = data
 
-.controller 'HuntCreateCtrl', ($scope, session, hunt) ->
-  $scope.hunt = {}
+.controller 'HuntsIndexAsideCtrl', ($scope, Hunt) ->
+  $scope.hunts = []
+  Hunt.index().then (hunts) ->
+    $scope.hunts = hunts
 
+
+.controller 'HuntsNewMainCtrl', ($scope, Hunt) ->
+  $scope.hunt = new Hunt
   $scope.submit = ->
-    console.log "HUNT", $scope.hunt
-    hunt.api.hunts.create $scope.hunt
+    $scope.hunt.create()
+    $scope.hunt = new Hunt
+
+.controller 'HuntsNewAsideCtrl', ($scope, Hunt) ->
+  undefined
 

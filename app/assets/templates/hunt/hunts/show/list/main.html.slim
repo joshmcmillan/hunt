@@ -1,7 +1,7 @@
 ul.properties-list
   li[
     ng-repeat="property in hunt.properties"
-    ui-sref="properties.view({propertyID: property.id})"
+    ui-sref="properties.show({propertyID: property.id})"
   ]
     .details style="background-image: url({{property.images[0].url}}); background-size: cover"
     h2

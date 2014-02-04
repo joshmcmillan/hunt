@@ -6,7 +6,7 @@ table.table.table-bordered
           | {{attr.name}}
   tbody
     tr ng-repeat="property in hunt.properties"
-      td ui-sref="properties.view({propertyID: property.id})"
+      td ui-sref="properties.show({propertyID: property.id})"
         | {{property.name}}
       td[
         ng-repeat="attr in attributes"
