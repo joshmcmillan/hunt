@@ -4,6 +4,10 @@ Desired usage:
 
 <map id="my-map"></map>
 
+- Manage arrays of markers/areas
+- Zoom to contain markers/areas
+- Control to add markers/areas
+
 ###
 
 
@@ -64,19 +68,30 @@ angular.module('google.maps', [])
       scope.map = new google.maps.Map(elem[0],
         zoom: 13
         mapTypeId: google.maps.MapTypeId.ROADMAP
+        draggableCursor: 'crosshair'
       )
 
       #map.$scope = $scope
       #maps.hash[attr.id] = $scope.map if attr.id
 
-      scope.marker = new google.maps.Marker map: scope.map
+      scope.marker = new google.maps.Marker
+        map: scope.map
+        draggable: true
 
-      scope.circle = new google.maps.Circle(
+      scope.circle = new google.maps.Circle
         map: scope.map
         fillColor: 'green'
         fillOpacity: 0.25
         strokeOpacity: 0
-      )
+
+      updateMarker = (event) ->
+        console.log "MAP EVENT", event
+        scope.$apply ->
+          scope.area.longitude = event.latLng.lng()
+          scope.area.latitude = event.latLng.lat()
+
+      google.maps.event.addListener scope.map, 'click', updateMarker
+      google.maps.event.addListener scope.marker, 'dragend', updateMarker
 
       scope.$watch 'area', (area) ->
         console.log 'area', area
@@ -91,6 +106,8 @@ angular.module('google.maps', [])
           scope.circle.setOptions
             center: location
             radius: area.radius * 500
+      , true
 
     ), 2000)
 ])
+

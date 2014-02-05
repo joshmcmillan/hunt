@@ -22,6 +22,9 @@ angular.module 'rest', []
         url: "#{@endpoint}#{url}.json"
         method: method
         data: data
+      .then (response) ->
+        console.log 'rest', method, url, response.data
+        response.data
 
     get:  (url) -> @http 'get', url
     post: (url, data) -> @http 'post', url, data
@@ -43,26 +46,26 @@ angular.module 'rest', []
           null
 
         create: ->
-          data = {}
-          obj = data[Model.singular] = @
-          api.post "/#{Model.plural}", data
-          .then (response) ->
-            obj.id = response.data.id
+          params = {}
+          obj = params[Model.singular] = @
+          api.post "/#{Model.plural}", params
+          .then (data) ->
+            obj.id = data.id
 
         update: ->
-          data = {}
-          data[Model.singular] = @
-          api.put "/#{Model.plural}", data
+          params = {}
+          params[Model.singular] = @
+          api.put "/#{Model.plural}", params
 
         @index: ->
           api.get "/#{@plural}"
-          .then (response) ->
-            new Model obj for obj in response.data
+          .then (data) ->
+            new Model obj for obj in data
 
         @show: (id) ->
           api.get "/#{@plural}/#{id}"
-          .then (response) ->
-            new Model response.data
+          .then (data) ->
+            new Model data
 
         @destroy: (id) ->
           api.del "/#{@plural}/#{id}"
