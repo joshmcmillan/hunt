@@ -6,13 +6,15 @@ angular.module('hunt')
     views: ['index', 'show', 'new', 'edit']
     templates: ['main', 'aside']
 
+
 .run (session) ->
-  session.huntsView = 'pipeline'
+  session.huntsView = 'dashboard'
 
 
-.controller 'HuntsShowCtrl', ($scope, $state, $stateParams, Hunt, session) ->
+.controller 'HuntsShowMainCtrl', ($scope, $state, $stateParams, Hunt, session) ->
   $scope.hunt = session.hunt = {}
-  Hunt.show($stateParams.huntID).then (hunt) ->
+  Hunt.show $stateParams.id
+  .then (hunt) ->
     $scope.hunt = session.hunt = hunt
 
   if $state.is 'hunts.show'
@@ -25,7 +27,8 @@ angular.module('hunt')
 
 .controller 'HuntsIndexMainCtrl', ($scope, Hunt) ->
   $scope.hunts = []
-  Hunt.index().then (hunts) ->
+  Hunt.index()
+  .then (hunts) ->
     console.log 'hunts', hunts
     $scope.hunts = hunts
 
@@ -39,6 +42,7 @@ angular.module('hunt')
   $scope.submit = ->
     $scope.hunt.create()
     $scope.hunt = new Hunt
+
 
 .controller 'HuntsNewAsideCtrl', ($scope, Hunt) ->
   undefined

@@ -6,7 +6,7 @@ angular.module('hunt')
     views: ['']
     templates: ['main', 'aside']
 
-.controller 'PipelineCtrl', ($scope, session) ->
+.controller 'PipelineMainCtrl', ($scope, session) ->
   session.huntsView = 'pipeline'
 
   $scope.stages = [
@@ -34,3 +34,5 @@ angular.module('hunt')
   hunt.api.properties.list (data) ->
     $scope.properties = data
 
+.controller 'PipelineAsideCtrl', ($scope) ->
+  undefined

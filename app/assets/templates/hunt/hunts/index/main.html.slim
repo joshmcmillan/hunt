@@ -1,9 +1,8 @@
 ul.hunts-list
   li ng-repeat="hunt in hunts"
-    .details
+    .details ui-sref="hunts.show({id: hunt.id})"
       h2
-        a ui-sref="hunts.show({id: hunt.id})"
-          | {{hunt.name}}
+        | {{hunt.name}}
 
     .users
       a[

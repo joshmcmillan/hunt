@@ -1,17 +1,12 @@
 angular.module('hunt')
 
-.config ($stateProvider) ->
-  $stateProvider
-    .state 'hunts.view.matrix',
-      url: '/matrix'
-      views:
-        main:
-          controller: 'MatrixCtrl'
-          templateUrl: 'hunt/hunts/view/matrix/main.html'
-        aside:
-          templateUrl: 'hunt/hunts/view/matrix/aside.html'
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
+    path: ['hunts', 'show', 'matrix']
+    views: ['']
+    templates: ['main']
 
-.controller 'MatrixCtrl', ($scope, session) ->
+.controller 'MatrixMainCtrl', ($scope, session) ->
   $scope.attributes = [
     {key: 'interested',   name: 'Interested'}
     {key: 'enquired',     name: 'Enquired'}

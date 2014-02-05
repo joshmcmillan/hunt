@@ -71,7 +71,6 @@ angular.module 'hunt.router'
   @mount = ($stateProvider, args...) ->
     for name, state of @build.apply @, args
       $stateProvider.state name, state
-      console.log "$stateProvider", name, state
 
   @.$get = ->
     null

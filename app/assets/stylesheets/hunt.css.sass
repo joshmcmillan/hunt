@@ -1,17 +1,17 @@
-@mixin left-shadow
+@mixin side-shadow
   box-shadow: -10px 0 0 0 rgba(0,0,0,0.15)
 
 @mixin bottom-shadow
   box-shadow: 0 10px 0 0 rgba(0,0,0,0.15)
 
-@mixin bottom-left-shadow
+@mixin bottom-side-shadow
   box-shadow: -10px 10px 0 0 rgba(0,0,0,0.15)
 
 
 @mixin calc($property, $expression)
+  #{$property}: -webkit-calc(#{$expression})
   #{$property}: -moz-calc(#{$expression})
   #{$property}: -o-calc(#{$expression})
-  #{$property}: -webkit-calc(#{$expression})
   #{$property}: calc(#{$expression})
 
 *
@@ -66,12 +66,13 @@ main
   background-color: #eee
 
   position: absolute
-  top: 50px
-  //right: 0
 
-  left: 50px
-  +calc(width, '100% - 50px')
+  left: 60px
+  +calc(width, '100% - 60px')
+
+  top: 50px
   +calc(height, '100% - 50px')
+
 
 aside
   color: #fff
@@ -87,8 +88,6 @@ aside
 
   overflow-y: scroll
 
-
-
 aside
   // padding: 10px
 
@@ -98,6 +97,19 @@ aside
 
     .btn
       border-radius: 0 !important
+      z-index: 0 !important
+
+      height: 50px
+      line-height: 50px
+      padding: 0
+      vertical-align: top
+      text-align: left
+
+      .fa
+        font-size: 25px
+        line-height: 50px
+        width: 50px
+        text-align: center
 
 property-card
   img
@@ -129,6 +141,16 @@ property-card
     //background-color: lighten(#222, 15% * $index)
     //background-color: #222
     //background-color: white
+
+table.matrix
+  color: #fff
+  border-collapse: collapse
+  border: solid 10px #fff
+  background-color: #333
+
+  td
+    border: dashed 10px #fff
+
 
 .stage
   position: absolute
@@ -166,11 +188,12 @@ property-card
 .hunts-view-map,
 .properties-list,
 .properties-list li
-  +left-shadow
-  +bottom-left-shadow
+  +side-shadow
+  +bottom-side-shadow
 
 .details
-  //+bottom-left-shadow
+  //+bottom-side-shadow
 
 .navbar
   +bottom-shadow
+

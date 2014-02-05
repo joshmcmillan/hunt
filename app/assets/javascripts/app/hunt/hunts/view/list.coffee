@@ -1,16 +1,11 @@
 angular.module('hunt')
 
-.config ($stateProvider) ->
-  $stateProvider
-    .state 'hunts.view.list',
-      url: '/list'
-      views:
-        main:
-          controller: 'ListCtrl'
-          templateUrl: 'hunt/hunts/view/list/main.html'
-        aside:
-          templateUrl: 'hunt/hunts/view/list/aside.html'
+.config ($stateProvider, resourceRouterProvider) ->
+  resourceRouterProvider.mount $stateProvider,
+    path: ['hunts', 'show', 'list']
+    views: ['']
+    templates: ['main']
 
-.controller 'ListCtrl', ($scope, session) ->
+.controller 'ListMainCtrl', ($scope, session) ->
   undefined
 

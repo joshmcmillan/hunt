@@ -2,21 +2,24 @@ h1 ui-sref="hunts.show({huntID: hunt.id})" {{hunt.name}}
 
 .btn-group-vertical
   button.btn.btn-success ui-sref="hunts.show.properties.create"
-    i.fa.fa-lg.fa-plus.pull-left
+    i.fa.fa-2x.fa-plus.pull-left
     New Property
 
 .btn-group-vertical
+    button.btn.btn-info ui-sref="hunts.show.dashboard"
+      i.fa.fa-2x.fa-fw.fa-tachometer.pull-left
+      | Dashboard
     button.btn.btn-info ui-sref="hunts.show.pipeline"
-      i.fa.fa-lg.fa-fw.fa-bar-chart-o.fa-rotate-180.pull-left
+      i.fa.fa-2x.fa-fw.fa-bar-chart-o.fa-rotate-180.pull-left
       | Pipeline
     button.btn.btn-info ui-sref="hunts.show.matrix"
-      i.fa.fa-lg.fa-fw.fa-table.pull-left
+      i.fa.fa-2x.fa-fw.fa-table.pull-left
       | Matrix
     button.btn.btn-info ui-sref="hunts.show.list"
-      i.fa.fa-lg.fa-fw.fa-list.pull-left
+      i.fa.fa-2x.fa-fw.fa-list.pull-left
       | List
     button.btn.btn-info ui-sref="hunts.show.map"
-      i.fa.fa-lg.fa-fw.fa-map-marker.pull-left
+      i.fa.fa-2x.fa-fw.fa-map-marker.pull-left
       | Map
 
 div ui-view="aside"
