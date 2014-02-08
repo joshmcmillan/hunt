@@ -17,6 +17,10 @@ angular.module('hunt', [
 
 ])
 
+.constant '_', _
+.constant 'io', io
+#.constant 'google', google
+
 .config ($httpProvider) ->
   $httpProvider.defaults.headers.common['X-CSRF-Token'] =
     $('meta[name=csrf-token]').attr('content')

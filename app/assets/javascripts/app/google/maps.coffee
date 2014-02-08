@@ -11,14 +11,15 @@ Desired usage:
 ###
 
 
-
-angular.module('google.maps', [])
-
+###
 .factory 'maps', ->
   google.maps
 
 .service 'google', ->
   {}
+###
+
+angular.module('google.maps', [])
 
 .directive('googleMapsAsync', ['$window', ($window) ->
   restrict: 'EA'
@@ -63,6 +64,7 @@ angular.module('google.maps', [])
   restrict: 'E'
   scope:
     area: '='
+    markers: '='
   link: (scope, elem, attr) ->
     $timeout((->
       scope.map = new google.maps.Map(elem[0],

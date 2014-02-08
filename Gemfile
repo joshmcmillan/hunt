@@ -41,3 +41,7 @@ gem 'font-awesome-sass'
 
 gem 'acts_as_commentable'
 gem 'paperclip', '~> 3.0'
+
+gem 'underscore-rails'
+gem 'socket.io-rails'
+

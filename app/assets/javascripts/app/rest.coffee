@@ -19,6 +19,7 @@ angular.module 'rest', []
 
     register: (Model) ->
       @models[Model.plural] = Model
+      return
       socket.subscribe "/rocket/#{Model.plural}", (obj) ->
         Model.cache[obj.id] ?= {}
         Model.cache[obj.id].extend obj

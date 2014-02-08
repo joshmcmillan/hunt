@@ -22,4 +22,3 @@ angular.module('hunt')
 
 .controller 'MapMainCtrl', ($scope) ->
   #$scope.filters = hunt.hunts.map.filters
-
