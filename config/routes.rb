@@ -4,9 +4,16 @@ HuntApp::Application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :hunts, except: [:new, :edit]
-      resources :properties, except: [:index, :new, :edit]
-      resources :users, except: [:new, :edit]
+      # TODO: unfuck
+      resources :hunts, except: [:new, :edit] do
+        resources :locations, only: [:create, :update, :destroy]
+      end
+      resources :properties, except: [:index, :new, :edit] do
+        resource :location, only: [:create, :update, :destroy]
+      end
+      resources :users, only: [:show] do
+        resources :locations, only: [:create, :update, :destroy]
+      end
     end
   end
 end

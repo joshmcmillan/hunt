@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140130222528) do
+ActiveRecord::Schema.define(version: 20140203220655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,21 +57,27 @@ ActiveRecord::Schema.define(version: 20140130222528) do
     t.integer  "target_beds"
     t.string   "target_cost_unit"
     t.integer  "target_cost_value"
-    t.string   "location"
-    t.decimal  "latitude",          precision: 10, scale: 6
-    t.decimal  "longitude",         precision: 10, scale: 6
-    t.decimal  "distance"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
   end
 
+  create_table "locations", force: true do |t|
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.string   "name"
+    t.decimal  "latitude",       precision: 10, scale: 6
+    t.decimal  "longitude",      precision: 10, scale: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "distance"
+  end
+
+  add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
+
   create_table "properties", force: true do |t|
     t.integer  "hunt_id"
     t.string   "name"
-    t.string   "location"
-    t.decimal  "latitude",      precision: 10, scale: 6
-    t.decimal  "longitude",     precision: 10, scale: 6
     t.boolean  "enquired"
     t.boolean  "agent_replied"
     t.boolean  "viewed"

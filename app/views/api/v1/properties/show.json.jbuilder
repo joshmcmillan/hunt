@@ -1,1 +1,5 @@
-json.extract! @property, :id, :created_at, :updated_at
+json.partial! 'mini', property: @property
+
+json.hunt do
+  json.partial! '/api/v1/hunts/mini', hunt: @property.hunt
+end
