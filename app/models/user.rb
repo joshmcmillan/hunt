@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
          omniauth_providers: [:facebook]
 
   has_many :hunts, through: :hunt_users
+  has_many :locations, as: :locatable
 
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, provider_uid: auth.uid).first_or_initialize.tap do |user|

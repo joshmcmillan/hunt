@@ -33,6 +33,8 @@ gem 'slim-rails'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'cancan'
+
 gem 'debugger', group: [:development, :test]
 
 gem 'dotenv-rails'

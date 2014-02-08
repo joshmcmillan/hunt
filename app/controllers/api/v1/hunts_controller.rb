@@ -1,24 +1,12 @@
-class Api::V1::HuntsController < ApplicationController
-  before_action :set_hunt, only: [:show, :edit, :update, :destroy]
-
+class Api::V1::HuntsController < Api::V1::BaseController
   # GET /hunts
   # GET /hunts.json
   def index
-    @hunts = Hunt.all
   end
 
   # GET /hunts/1
   # GET /hunts/1.json
   def show
-  end
-
-  # GET /hunts/new
-  def new
-    @hunt = Hunt.new
-  end
-
-  # GET /hunts/1/edit
-  def edit
   end
 
   # POST /hunts
@@ -62,11 +50,6 @@ class Api::V1::HuntsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_hunt
-      @hunt = Hunt.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def hunt_params
       params[:hunt]

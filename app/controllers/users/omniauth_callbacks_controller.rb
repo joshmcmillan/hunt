@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < ApplicationController
+  skip_authorization_check
+  
   def facebook
     @user = User.find_for_facebook_oauth(request.env['omniauth.auth'])
 

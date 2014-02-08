@@ -6,12 +6,13 @@ json.target_cost do
 end
 
 json.users do
-  json.array! hunt.users, :id, :name, :avatar
+  json.array!(hunt.users) do |json, user|
+    json.partial! '/api/v1/users/mini', user: user
+  end
 end
 
-json.area do
-  json.name hunt.location
-  json.latitude hunt.latitude
-  json.longitude hunt.longitude
-  json.distance hunt.distance
+json.locations do
+  json.array!(hunt.locations) do |json, location|
+    json.partial! '/api/v1/locations/mini', location: location
+  end
 end
