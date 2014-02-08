@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   has_many :hunts, through: :hunt_users
   has_many :locations, as: :locatable
 
+  validate :first_name, presence: true
+  validate :last_name, presence: true
+
   def self.find_for_facebook_oauth(auth)
     where(provider: auth.provider, provider_uid: auth.uid).first_or_initialize.tap do |user|
       user.provider     = auth.provider
