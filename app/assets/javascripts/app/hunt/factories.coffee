@@ -1,24 +1,22 @@
 angular.module 'hunt'
 
-.service '$delay', ($timeout) -> (ms, callback) -> $timeout callback, ms
-
 # TODO maybe not rootScope this? :(
 .service 'maps', ($rootScope) ->
   maps =
     locationUpdater: (location) ->
       (event) ->
-        $scope.apply ->
+        $rootScope.apply ->
           location.longitude = event.latLng.lng()
           location.latitude = event.latLng.lat()
 
     location: (location) ->
-      console.log 'maps.location', location
       new google.maps.LatLng location.latitude, location.longitude
 
-    marker: (location) ->
-      marker = new google.maps.Marker
-        position: maps.location location
-        draggable: true
+    marker: (options) ->
+      options ?= {}
+      options.draggable ?= true
+      #options.position ?= maps.location x, y
+      marker = new google.maps.Marker options
       google.maps.event.addListener marker, 'dragend', maps.locationUpdater location
       marker
 
@@ -37,51 +35,44 @@ angular.module 'hunt'
       options.mapTypeId ?= google.maps.MapTypeId.ROADMAP
       new google.maps.Map elem, options
 
-.directive 'map', (maps, $delay) ->
+.directive 'map', (maps) ->
   restrict: 'E'
   scope:
     center: '='
-    markers: '='
+  transclude: true
+  template: """
+    <map-hook />
+    <map-controls ng-transclude />
+  """
   link: (scope, elem) ->
-    $delay 1000, ->
-      scope.map = maps.map elem[0]  # TODO Pass in some attr config here
 
-      markers = _ []  # TODO inject _
+    scope.test =
+      map: maps.map elem.find('map-hook')[0]  # TODO Pass in some attr config here
 
-      scope.$watch 'center', (newValue) ->
-        scope.map.setCenter maps.location newValue
+    scope.$watch 'center', (newValue) ->
+      console.log 'map.center', scope.center
+      scope.test.map.setCenter maps.location newValue if newValue
 
-      scope.$watchCollection 'markers', (newValue) ->
-        for marker in markers
-          marker.setMap null
+.directive 'mapHook', (maps) ->
+  restrict: 'E'
 
-        for marker in newValue ?= []
-          m = maps.marker marker
-          m.setMap scope.map
-          m.setVisible yes
-          markers.push m
-          console.log "marker", m
+.directive 'marker', (maps) ->
+  restrict: 'E'
+  scope:
+    map: '='
+    position: '='
+  link: (scope, elem, attrs, mapCtrl) ->
+    marker = maps.marker()
 
-        return
+    scope.$on '$destroy', ->
+      marker.setMap null
 
-        # TODO un O(n^2) this (Last one even O(n^3)
-        ###
-        olds ?= []
-        news ?= []
+    scope.$watch 'position', (newValue) ->
+      console.log 'marker.position', newValue
+      marker.setPosition maps.location newValue if newValue
 
-        console.log 'markers', news, olds
+    scope.$watch 'map', (newValue) ->
+      console.log 'marker.map', newValue, scope
+      marker.setMap newValue
 
-        for marker in news
-          unless marker in olds
-            m = maps.marker marker
-            m.setMap scope.map
-            m.setVisible yes
-            markers.push m
-            m
-            # markers.push maps.marker angular.extend {map: scope.map}, marker
-
-        for marker in olds
-          unless marker in news
-            delete markers[markers.indexOf marker]
-
-        ###
+    marker.setMap scope.map

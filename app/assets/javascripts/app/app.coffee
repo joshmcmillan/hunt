@@ -42,3 +42,8 @@ angular.module('hunt', [
 
 .run ($rootScope, session) ->
   $rootScope.session = session
+
+.run ($rootScope) ->
+  $rootScope.currency =
+    unit: 'GBP'
+    icon: '£'

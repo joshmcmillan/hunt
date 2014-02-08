@@ -12,19 +12,20 @@ angular.module 'hunt'
       {slug: 'date', name: 'Date'}
     ]
 
-.controller 'PropertyListCtrl', ($scope, hunt) ->
-  $scope.properties = []
-
-  hunt.api.properties.list()
-    .success (data) ->
-      $scope.properties = data
-
-.controller 'PropertyViewCtrl', ($scope, $stateParams, hunt) ->
+.controller 'PropertyShowMainCtrl', ($scope, $stateParams, Property) ->
   $scope.property = {}
 
-  hunt.api.properties.view($stateParams.propertyID)
-    .success (data) ->
-      $scope.property = data
+  Property.show $stateParams.id
+  .then (property) ->
+    $scope.property = property
+
+.controller 'PropertyNewMainCtrl', ($scope, Property) ->
+  $scope.property = new Property
+  $scope.create = ->
+    $scope.property.create()
+      .then (property) ->
+        $state.transitionTo 'property.show', id: property.id
+    $scope.property = new Property
 
 .directive 'propertyProgress', ->
   restrict: 'E'

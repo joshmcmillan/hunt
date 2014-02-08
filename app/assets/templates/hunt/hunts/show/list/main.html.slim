@@ -1,9 +1,23 @@
-ul.properties-list
+ul.properties
   li[
     ng-repeat="property in hunt.properties"
-    ui-sref="properties.show({propertyID: property.id})"
+    ui-sref="properties.show({id: property.id})"
   ]
     .details style="background-image: url({{property.images[0].url}}); background-size: cover"
     h2
       | {{property.name}}
-    google-map area="property.location"
+    dl
+      dt Price
+      dd
+        | {{currency.icon}} {{property.price.value}} {{property.price.unit}}
+      dt Beds
+      dd
+        | {{property.bed_count}}
+      dt Bathrooms
+      dd
+        | {{property.bathroom_count}}
+      dt Surface (m<sup>2</sup>)
+      dd
+        | {{property.surface}}
+    map center="property.location"
+

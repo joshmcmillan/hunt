@@ -10,4 +10,9 @@ angular.module('hunt')
   session.huntsView = 'dashboard'
 
 .controller 'DashboardMainCtrl', ($scope) ->
-  undefined
+  $scope.markers = [
+    {longitude: 0, latitude: 52}
+    {longitude: 1, latitude: 52}
+    {longitude: 2, latitude: 52}
+    {longitude: 3, latitude: 52}
+  ]

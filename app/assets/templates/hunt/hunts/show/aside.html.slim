@@ -1,9 +1,9 @@
-h1 ui-sref="hunts.show({huntID: hunt.id})" {{hunt.name}}
+h1 ui-sref="hunts.show({id: hunt.id})" {{hunt.name}}
 
 .btn-group-vertical
-  button.btn.btn-success ui-sref="hunts.show.properties.create"
+  button.btn.btn-success ui-sref="hunts.show.properties.new"
     i.fa.fa-2x.fa-plus.pull-left
-    New Property
+    | New Property
 
 .btn-group-vertical
     button.btn.btn-info ui-sref="hunts.show.dashboard"

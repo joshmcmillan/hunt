@@ -22,9 +22,17 @@
 
 map,
 google-map
-  position: absolute
+  position: relative
+  display: block
   height: 100%
   width: 100%
+  height: 300px
+  width: 300px
+
+  map-hook
+    position: absolute
+    width: 100%
+    height: 100%
 
 .properties-view
   overflow: hidden
@@ -137,6 +145,45 @@ property-card
 
 .pipeline
   height: 100%
+
+.hunts
+  .show
+    .map
+      position: absolute
+      height: 100%
+      width: 100%
+
+      map
+        position: absolute
+        top: 0
+        left: 0
+        height: 100%
+        width: 100%
+
+.dashboard
+  height: 100%
+
+  .details
+    position: absolute
+    height: 50%
+    width: 50%
+    top: 0
+    left: 0
+
+
+  .properties
+    position: absolute
+    height: 100%
+    width: 50%
+    top: 0
+    right: 0
+
+  map
+    position: absolute
+    left: 0
+    bottom: 0
+    height: 50%
+    width: 50%
 
 @mixin stage($index)
   &:nth-child(#{$index})

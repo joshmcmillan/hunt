@@ -1,10 +1,32 @@
 .dashboard
-  h2
-    | {{hunt.name}}
-  dl
-    dt Target Cost Value
-    dd
-      | {{hunt.targetCost.value}}
-    dt Target Cost Unit
-    dd
-      | {{hunt.targetCost.unit}}
+  .details
+    h2
+      | {{hunt.name}}
+    dl
+      dt Target Cost Value
+      dd
+        | {{hunt.targetCost.value}}
+      dt Target Cost Unit
+      dd
+        | {{hunt.targetCost.unit}}
+
+  map center="hunt.area"
+    marker map="map" position="hunt.area"
+    marker map="map" position="markers[0]"
+    marker map="map" position="markers[1]"
+    marker map="map" position="markers[2]"
+    marker map="map" position="markers[3]"
+    marker map="map" position="location" ng-repeat="location in markers track by $index"
+
+  ul.properties
+    li Filter controls | fav | price | date
+    li ui-sref="hunts.show.properties.new"
+      i.fa.fa-3x.fa-plus.pull-left
+      | New Property
+    li[
+      ng-repeat="property in hunt.properties"
+      ui-sref="properties.show({id: property.id})"
+    ]
+      h3
+        | {{property.name}}
+      img ng-src="property.image"

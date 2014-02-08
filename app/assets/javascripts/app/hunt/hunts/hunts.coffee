@@ -39,7 +39,7 @@ angular.module('hunt')
 
 .controller 'HuntsNewMainCtrl', ($scope, Hunt, $state) ->
   $scope.hunt = new Hunt
-  $scope.submit = ->
+  $scope.create = ->
     $scope.hunt.create()
       .then (hunt) ->
         $state.transitionTo 'hunts.show.dashboard', id: hunt.id
