@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     return if user.blank?
 
-    can :manage, Hunt, Hunt.all do |hunt|
+    can :manage, Hunt, Hunt.includes(:users).where(users: { id: user }) do |hunt|
       hunt.users.include?(user)
     end
 
