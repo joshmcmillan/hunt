@@ -7,24 +7,25 @@ form ng-submit="submit()"
     label for="form-target-beds" Target cost value
     input.form-control id="form-target-cost-value" type="number" ng-model="hunt.target_cost_value" placeholder="e.g. 400"
 
-  input type="hidden" name="target_cost_unit" value="weekly"
+  select[
+    ng-model="hunt.target_cost_unit"
+    ng-options="option for option in targetCostUnitOptions"
+  ]
 
-  .form-group
-    label for="form-location" Location
-    input.form-control id="form-location" type="text" ng-model="hunt.location" placeholder="Name"
+  map center="currentPosition"
+    marker position="location" ng-repeat="location in hunt.locations" draggable="true"
 
-  .form-group
-    label for="form-longitude" Longitude
-    input.form-control id="form-longitude" type="text" ng-model="hunt.longitude" placeholder="e.g. 52.102380"
+  | {{hunt.locations}}
 
-  .form-group
-    label for="form-latitude" Latitude
-    input.form-control id="form-latitude" type="text" ng-model="hunt.latitude" placeholder="e.g. 54.425470"
+  button class="btn btn-success" ng-click="hunt.addLocation(currentPosition)"
+    i.fa.fa-2x.fa-plus.pull-left
+    | Add Location
 
-  .form-group
-    label for="form-distance" Distance
-    input.form-control id="form-distance" type="number" ng-model="hunt.distance" placeholder="e.g. 5"
-
+  div ng-repeat="location in hunt.locations"
+    input.form-control type="text" ng-model="locaton.name" placeholder="Name"
+    input.form-control type="text" ng-model="location.longitude" placeholder="e.g. 52.102380"
+    input.form-control type="text" ng-model="location.latitude" placeholder="e.g. 54.425470"
+    input.form-control type="number" ng-model="location.distance" placeholder="e.g. 5"
 
   input class="btn btn-success" type="submit" value="Submit"
   button class="btn btn-default" type="button" ui-sref="hunts.index" Cancel

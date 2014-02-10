@@ -3,19 +3,23 @@ angular.module 'hunt'
 .service 'hunt', (Api) ->
   new Api '/api/v1'
 
-.factory 'Hunt', (hunt) ->
+.factory 'Location', (hunt) ->
+  Location = hunt.model 'locations'
+
+.factory 'Hunt', (hunt, Location) ->
   Hunt = hunt.model 'hunts'
 
   Hunt::init = ->
-    @area.latitude = parseFloat @area.latitude
-    @area.longitude = parseFloat @area.longitude
-    @area.distance = parseFloat @area.distance
+    @locations ?= []
+
+  Hunt::addLocation = (options) ->
+    @locations.push new Location options
 
   Hunt
 
 .factory 'Property', (hunt) ->
-  hunt.model 'properties', 'property'
+  Property = hunt.model 'properties', 'property'
 
 .factory 'User', (hunt) ->
-  hunt.model 'users'
+  User = hunt.model 'users'
 

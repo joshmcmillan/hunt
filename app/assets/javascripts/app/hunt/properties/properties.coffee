@@ -25,7 +25,7 @@ angular.module 'hunt'
     $scope.property.create()
       .then (property) ->
         $state.transitionTo 'property.show', id: property.id
-    $scope.property = new Property
+        $scope.property = new Property
 
 .directive 'propertyProgress', ->
   restrict: 'E'
