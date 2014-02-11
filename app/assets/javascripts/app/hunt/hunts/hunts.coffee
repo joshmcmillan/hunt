@@ -38,10 +38,6 @@ angular.module('hunt')
 
 .controller 'HuntsNewMainCtrl', ($scope, Hunt, $state) ->
   $scope.markers = []
-  $scope.targetCostUnitOptions = [
-    'weekly'
-    'monthly'
-  ]
   $scope.hunt = new Hunt
   $scope.create = ->
     delete $scope.hunt.locations

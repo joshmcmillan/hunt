@@ -1,4 +1,4 @@
-form ng-submit="submit()"
+form ng-submit="create()"
   .form-group
     label for="form-name" Name
     input.form-control[
@@ -44,6 +44,6 @@ form ng-submit="submit()"
     input.form-control type="text" ng-model="location.latitude" placeholder="e.g. 54.425470"
     input.form-control type="number" ng-model="location.distance" placeholder="e.g. 5"
 
-  input class="btn btn-success" type="submit" value="Submit" ng-click="create()"
+  input class="btn btn-success" type="submit" value="Submit"
   button class="btn btn-default" type="button" ui-sref="hunts.index" Cancel
 

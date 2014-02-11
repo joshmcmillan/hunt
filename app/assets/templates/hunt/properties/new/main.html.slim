@@ -1,0 +1,21 @@
+form ng-submit="create()"
+  .form-group
+    label for="form-name" Name
+    input.form-control[
+      ng-model="property.name"
+      id="form-name"
+      type="text"
+      placeholder="e.g. Chaplin Apartments"
+    ]
+
+  map center="currentPosition"
+    marker position="location" draggable="true"
+
+  input.form-control type="text" ng-model="property.locaton.name" placeholder="Name"
+  input.form-control type="text" ng-model="property.location.longitude" placeholder="e.g. 52.102380"
+  input.form-control type="text" ng-model="property.location.latitude" placeholder="e.g. 54.425470"
+  input.form-control type="number" ng-model="property.location.distance" placeholder="e.g. 5"
+
+  input class="btn btn-success" type="submit" value="Submit"
+  button class="btn btn-default" type="button" ui-sref="hunts.show" Cancel
+

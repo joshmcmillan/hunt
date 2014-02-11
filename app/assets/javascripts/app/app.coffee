@@ -47,3 +47,14 @@ angular.module('hunt', [
   $rootScope.currency =
     unit: 'GBP'
     icon: '£'
+
+  $rootScope.currencyOption = [
+    {unit: 'GBP', icon: '£'}
+    {unit: 'EUR', icon: '€'}
+    {unit: 'USD', icon: '$'}
+  ]
+
+  $rootScope.targetCostUnitOptions = [
+    'weekly'
+    'monthly'
+  ]
