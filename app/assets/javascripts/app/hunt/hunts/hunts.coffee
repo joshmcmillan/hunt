@@ -29,7 +29,6 @@ angular.module('hunt')
   $scope.hunts = []
   Hunt.index()
   .then (hunts) ->
-    console.log 'hunts', hunts
     $scope.hunts = hunts
 
 
@@ -38,30 +37,15 @@ angular.module('hunt')
 
 
 .controller 'HuntsNewMainCtrl', ($scope, Hunt, $state) ->
-  # TODO
-  # - Make smart assumptions about position?
-  # - Prepopulate through FB?
-  $scope.currentPosition =
-    longitude: 0
-    latitude: 0
-
-  $scope.markers = [
-  ]
-
-  if navigator.geolocation
-    navigator.geolocation.getCurrentPosition (position) ->
-      $scope.$apply ->
-        $scope.currentPosition = position.coords
-        $scope.hunt.longitude = position.coords.longitude
-        $scope.hunt.latitude = position.coords.latitude
-        $scope.markers.push position.coords
-
+  $scope.markers = []
   $scope.targetCostUnitOptions = [
     'weekly'
     'monthly'
   ]
   $scope.hunt = new Hunt
   $scope.create = ->
+    delete $scope.hunt.locations
+    console.log 'hunt', $scope.hunt
     $scope.hunt.create()
       .then (hunt) ->
         $state.transitionTo 'hunts.show.dashboard', id: hunt.id

@@ -6,16 +6,16 @@ angular.module 'hunt'
   # - Prepopulate through FB?
   return unless navigator.geolocation
 
-  getCurrentLocation: (callback) ->
+  getCurrentPosition: (callback) ->
     navigator.geolocation.getCurrentPosition (position) ->
       callback
         longitude: position.coords.longitude
         latitude: position.coords.latitude
 
 .run ($rootScope, geo) ->
-  geo.getCurrentLocation (location) ->
+  geo.getCurrentPosition (location) ->
     $rootScope.$apply ->
-      $rootScope.currentLocation = location
+      $rootScope.currentPosition = location
 
 
 # TODO maybe not rootScope this? :(
@@ -62,75 +62,57 @@ angular.module 'hunt'
     <map-hook></map-hook>
     <map-controls ng-transclude></map-controls>
   """
-  link: (scope, elem) ->
-    #map = maps.map elem.find('map-hook')[0]  # TODO Pass in some attr config here
-    scope.map = null
-
-    scope.$on 'getMap', ->
-      scope.$broadcast 'setMap', scope.map
-
-    scope.$broadcast 'setMap', scope.map
-
 
 .directive 'mapHook', (maps) ->
   restrict: 'E'
   scope: true
   link: (scope, elem) ->
-    scope.map = maps.map elem[0]  # TODO Pass in some attr config here
+    scope.map = maps.map elem[0],
+      center: maps.location scope.center
+    # TODO Pass in some attr config here
 
-    scope.$watch 'center', (newValue) ->
-      console.log 'map.center', scope.center
+    ###
+    scope.$watch 'center', (newValue, oldValue) ->
+      return if newValue is oldValue
       scope.map.setCenter maps.location newValue if newValue
     , true
+    ###
 
+    google.maps.event.addListener scope.map, 'center_changed', ->
+      # TODO getCenter() seems to be very inaccurate
+      center = scope.map.getCenter()
 
-.directive 'marker', (maps, $timeout) ->
+      scope.$apply ->
+        scope.center.longitude = center.lng()
+        scope.center.latitude = center.lat()
+
+.directive 'marker', (maps) ->
   restrict: 'E'
   scope:
     position: '='
     draggable: '='
   link: (scope, elem, attrs) ->
-    console.log scope
-    marker = maps.marker draggable: scope.draggable
+    scope.marker = maps.marker
+      draggable: true
+
+    #draggable: scope.draggable
 
     # TODO This is suuuperugly but works.
-    marker.setMap elem.parent().parent().find('map-hook').scope().map
+    scope.marker.setMap elem.parent().parent().find('map-hook').scope().map
+
+    google.maps.event.addListener scope.marker, 'dragend', (event) ->
+      scope.$apply ->
+        scope.position.longitude = event.latLng.lng()
+        scope.position.latitude = event.latLng.lat()
 
     scope.$on '$destroy', ->
-      marker.setMap null
+      scope.marker.setMap null
+
+    scope.$watch 'draggable', (newValue) ->
+      console.log 'draggable', newValue
+      scope.marker.setDraggable newValue
 
     scope.$watch 'position', (newValue) ->
-      console.log 'marker.position', newValue
-      marker.setPosition maps.location newValue if newValue
+      scope.marker.setPosition maps.location newValue if newValue
     , true
 
-    $timeout ->
-      scope.$emit 'getMap'
-    , 0
-
-    scope.$on 'setMap', (map) ->
-      console.log 'setMap', map
-      marker.setMap map
-
-    ###
-    scope.$watch '$parent.$parent.$$childHead.map', (newValue) ->
-      console.log '$parent.$parent'
-      console.log 'marker.map', newValue
-      marker.setMap newValue
-
-    scope.$watch '$parent.$parent.$parent.$$childHead.map', (newValue) ->
-      console.log '$parent.$parent.$parent'
-      console.log 'marker.map', newValue
-      marker.setMap newValue
-
-    console.log 'init map', scope.$parent.$parent.$$childHead.map || scope.$parent.$parent.$parent.$$childHead.map
-
-    $timeout ->
-      marker.setMap scope.$parent.$parent.$$childHead.map || scope.$parent.$parent.$parent.$$childHead.map
-    , 2000
-
-    ###
-
-.run ($rootScope) ->
-  $rootScope.$on 'getMap', (cb) ->
-    console.log '$rootScope.getMap'
