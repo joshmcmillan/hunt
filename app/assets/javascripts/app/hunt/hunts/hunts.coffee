@@ -36,16 +36,18 @@ angular.module('hunt')
   undefined
 
 
-.controller 'HuntsNewMainCtrl', ($scope, Hunt, $state) ->
-  $scope.markers = []
+.controller 'HuntsNewMainCtrl', ($scope, $state, Hunt, Location) ->
   $scope.hunt = new Hunt
-  $scope.create = ->
-    delete $scope.hunt.locations
-    console.log 'hunt', $scope.hunt
+  $scope.locations = []
+
+  $scope.addLocation = ->
+    $scope.locations.push new Location $scope.currentLocation
+
+  $scope.submit = ->
     $scope.hunt.create()
-      .then (hunt) ->
-        $state.transitionTo 'hunts.show.dashboard', id: hunt.id
-        $scope.hunt = new Hunt
+    .then (hunt) ->
+      location.create hunt for location in $scope.locations
+      $state.transitionTo 'hunts.show.dashboard', hunt  #id: hunt.id
 
 
 .controller 'HuntsNewAsideCtrl', ($scope, Hunt) ->

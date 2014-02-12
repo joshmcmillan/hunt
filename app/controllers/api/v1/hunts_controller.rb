@@ -4,11 +4,13 @@ class Api::V1::HuntsController < Api::V1::BaseController
   # GET /hunts
   # GET /hunts.json
   def index
+    @hunts = Hunt.all
   end
 
   # GET /hunts/1
   # GET /hunts/1.json
   def show
+    @hunt = Hunt.find params[:id]
   end
 
   # POST /hunts

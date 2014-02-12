@@ -13,6 +13,9 @@ angular.module 'hunt'
         latitude: position.coords.latitude
 
 .run ($rootScope, geo) ->
+  $rootScope.currentPosition =
+    longitude: 0
+    latitude: 0
   geo.getCurrentPosition (location) ->
     $rootScope.$apply ->
       $rootScope.currentPosition = location
@@ -28,6 +31,7 @@ angular.module 'hunt'
           location.latitude = event.latLng.lat()
 
     location: (location) ->
+      return unless location
       new google.maps.LatLng parseInt(location.latitude), parseInt(location.longitude)
 
     marker: (options) ->

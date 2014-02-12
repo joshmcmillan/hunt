@@ -10,10 +10,12 @@ class Api::V1::PropertiesController < Api::V1::BaseController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
+    @property.hunt = Hunt.find hunt_params[:id]
+    @property.location = Location.create(location_params)
 
     respond_to do |format|
       if @property.save
-        format.json { render action: 'show', status: :created, location: @property }
+        format.json { render action: 'show', status: :created, location: api_v1_property_url(@property) }
       else
         format.json { render json: @property.errors, status: :unprocessable_entity }
       end
@@ -49,6 +51,15 @@ class Api::V1::PropertiesController < Api::V1::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params[:property]
+      params.require(:property).permit :name
     end
+
+    def location_params
+      params[:property].require(:location).permit :name, :longitude, :latitude
+    end
+
+    def hunt_params
+      params[:property].require(:hunt).permit :id
+    end
+
 end

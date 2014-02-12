@@ -9,14 +9,6 @@ angular.module 'hunt'
 .factory 'Hunt', (hunt, Location) ->
   Hunt = hunt.model 'hunts'
 
-  Hunt::init = ->
-    @locations ?= []
-
-  Hunt::addLocation = (options) ->
-    @locations.push new Location options
-
-  Hunt
-
 .factory 'Property', (hunt) ->
   Property = hunt.model 'properties', 'property'
 

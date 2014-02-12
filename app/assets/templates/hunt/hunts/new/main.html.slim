@@ -1,4 +1,4 @@
-form ng-submit="create()"
+form ng-submit="submit()"
   .form-group
     label for="form-name" Name
     input.form-control[
@@ -32,13 +32,13 @@ form ng-submit="create()"
   ]
 
   map center="currentPosition"
-    marker position="location" ng-repeat="location in hunt.locations" draggable="true"
+    marker position="location" ng-repeat="location in locations" draggable="true"
 
-  button class="btn btn-success" ng-click="hunt.addLocation(currentPosition)"
+  button class="btn btn-success" ng-click="addLocation()"
     i.fa.fa-1x.fa-plus
     i.fa.fa-2x.fa-map-marker
 
-  div ng-repeat="location in hunt.locations"
+  div ng-repeat="location in locations"
     input.form-control type="text" ng-model="locaton.name" placeholder="Name"
     input.form-control type="text" ng-model="location.longitude" placeholder="e.g. 52.102380"
     input.form-control type="text" ng-model="location.latitude" placeholder="e.g. 54.425470"

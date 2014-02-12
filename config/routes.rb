@@ -7,6 +7,7 @@ HuntApp::Application.routes.draw do
       # TODO: unfuck
       resources :hunts, except: [:new, :edit] do
         resources :locations, only: [:create, :update, :destroy]
+        resources :properties, only: [:index, :create]
       end
       resources :properties, except: [:index, :new, :edit] do
         resource :location, only: [:create, :update, :destroy]

@@ -12,14 +12,17 @@ angular.module 'hunt'
       {slug: 'date', name: 'Date'}
     ]
 
-.controller 'PropertyShowMainCtrl', ($scope, $stateParams, Property) ->
+.controller 'PropertiesShowAsideCtrl', ($scope, $stateParams, Property) ->
+  undefined
+
+.controller 'PropertiesShowMainCtrl', ($scope, $stateParams, Property) ->
   $scope.property = {}
 
   Property.show $stateParams.id
   .then (property) ->
     $scope.property = property
 
-.controller 'PropertyNewMainCtrl', ($scope, Property) ->
+.controller 'PropertiesNewMainCtrl', ($scope, Property) ->
   $scope.property = new Property
   $scope.create = ->
     $scope.property.create()
